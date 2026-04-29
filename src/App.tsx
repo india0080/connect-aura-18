@@ -22,6 +22,7 @@ import Profile from "./pages/dashboard/Profile";
 import Premium from "./pages/Premium";
 import Notifications from "./pages/Notifications";
 import SafetyGuidelines from "./pages/SafetyGuidelines";
+import SafetyCode from "./pages/SafetyCode";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -54,6 +55,7 @@ const App = () => (
 
             <Route path="/premium" element={<Premium />} />
             <Route path="/safety" element={<SafetyGuidelines />} />
+            <Route path="/safety-code" element={<SafetyCode />} />
             <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />
