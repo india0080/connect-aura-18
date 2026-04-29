@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import { GuestRoute, ProtectedRoute } from "@/components/common/ProtectedRoute";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { SplashScreen } from "@/components/common/SplashScreen";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
@@ -38,6 +39,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Sonner position="top-center" richColors closeButton />
+      <SplashScreen />
       <BrowserRouter>
         <AuthProvider>
           <Routes>
