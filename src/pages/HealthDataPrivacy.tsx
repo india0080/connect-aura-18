@@ -71,7 +71,7 @@ export default function HealthDataPrivacy() {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Consumer Health Data Privacy Policy v3.0 — GoMilap"
+        title="Consumer Health Data Privacy Policy v1.0 — GoMilap"
         description="GoMilap collects only the minimum health-related data needed for matching and safety. No medical records. Encrypted. India-based servers. Full user rights."
       />
 
@@ -91,7 +91,7 @@ export default function HealthDataPrivacy() {
           <div className="inline-flex h-16 w-16 rounded-2xl bg-gradient-brand items-center justify-center shadow-glow mb-6">
             <HeartPulse className="h-8 w-8 text-primary-foreground" />
           </div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Version 3.0 · Last Updated April 28, 2026</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Version 1.0 · Last Updated April 28, 2026</p>
           <h1 className="font-display font-bold text-4xl md:text-6xl leading-tight">
             Consumer Health Data <span className="text-gradient-brand">Privacy Policy</span>
           </h1>
@@ -114,7 +114,7 @@ export default function HealthDataPrivacy() {
             <CardContent className="p-0">
               <Table>
                 <TableBody>
-                  <TableRow><TableCell className="font-medium w-44">Version</TableCell><TableCell>3.0</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium w-44">Version</TableCell><TableCell>1.0</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Last Updated</TableCell><TableCell>April 28, 2026</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Applicable Region</TableCell><TableCell>India (Primary) | International Users</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">General Support</TableCell><TableCell><a href="mailto:support@gomilap.com" className="text-primary hover:underline">support@gomilap.com</a></TableCell></TableRow>
@@ -452,7 +452,7 @@ export default function HealthDataPrivacy() {
             <CardContent className="p-5 flex gap-3">
               <Building2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
               <div className="text-sm text-foreground/90">
-                <p className="font-medium">GoMilap Technologies Private Limited</p>
+                <p className="font-medium">GoMilap</p>
                 <p className="text-muted-foreground">Bajaj Dwar, Rudrapur – 263153, Uttarakhand, India</p>
               </div>
             </CardContent>
@@ -478,7 +478,7 @@ export default function HealthDataPrivacy() {
 
           {/* Declaration */}
           <H2 id="declaration" icon={BadgeCheck}>Declaration</H2>
-          <P>GoMilap Technologies Private Limited confirms:</P>
+          <P>GoMilap confirms:</P>
           <div className="grid sm:grid-cols-2 gap-3 my-4">
             {[
               'We collect only the minimum health data needed to run our service',
@@ -508,7 +508,7 @@ export default function HealthDataPrivacy() {
                 GoMilap — Your Health Data, Your Privacy, Your Choice
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
-                Version 3.0 · Last Updated April 28, 2026
+                Version 1.0 · Last Updated April 28, 2026
               </p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm">
                 <a href="mailto:support@gomilap.com" className="text-primary hover:underline">support@gomilap.com</a>

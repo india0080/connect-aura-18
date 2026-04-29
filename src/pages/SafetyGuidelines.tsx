@@ -373,7 +373,7 @@ export default function SafetyGuidelines() {
           <H3>6.1 How to Report</H3>
           <UL>
             <li><strong>In-App Reporting:</strong> Use the Report button on the content or profile</li>
-            <li><strong>Email:</strong> safety@gomilap.com</li>
+            <li><strong>Email:</strong> support@gomilap.com</li>
             <li><strong>Contact Form:</strong> Submit through our contact page</li>
           </UL>
           <H3>6.2 What Happens When You Report</H3>
@@ -520,9 +520,9 @@ export default function SafetyGuidelines() {
               <Mail className="h-5 w-5 text-primary" /> Contact the GoMilap Safety Team
             </h3>
             <p className="text-muted-foreground text-sm mb-3">
-              For safety reports: <a href="mailto:safety@gomilap.com" className="text-primary hover:underline">safety@gomilap.com</a>
+              For support and safety reports: <a href="mailto:support@gomilap.com" className="text-primary hover:underline">support@gomilap.com</a>
               <br />
-              For general inquiries: <a href="mailto:support@gomilap.com" className="text-primary hover:underline">support@gomilap.com</a>
+              For grievances: <a href="mailto:grievance@gomilap.com" className="text-primary hover:underline">grievance@gomilap.com</a>
               <br />
               In-app: Use the Report button on any content or profile.
             </p>

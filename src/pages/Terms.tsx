@@ -215,7 +215,7 @@ export default function Terms() {
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
               <span className="text-muted-foreground">Version</span>{' '}
-              <strong className="text-foreground">2.0</strong>
+              <strong className="text-foreground">1.0</strong>
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60 inline-flex items-center gap-1.5">
               <Globe2 className="h-3.5 w-3.5 text-primary" />
@@ -294,7 +294,7 @@ export default function Terms() {
           <P>
             By creating an account or using GoMilap, you agree to these Terms. They form a legally binding
             agreement between <strong className="text-foreground">you</strong> (the user) and{' '}
-            <strong className="text-foreground">GoMilap Technologies Private Limited</strong>.
+            <strong className="text-foreground">GoMilap</strong>.
           </P>
           <Callout tone="warn" icon={AlertTriangle} title="If you do not agree…">
             <p>Then please do not use GoMilap.</p>
@@ -698,7 +698,7 @@ export default function Terms() {
               ['Email', <a key="g1" href="mailto:grievance@gomilap.com" className="text-primary hover:underline">grievance@gomilap.com</a>],
               ['Response Time', 'Within 24 hours'],
               ['Resolution Time', 'Within 15 days'],
-              ['Physical Address', 'Bajaj Dwar, Rudrapur - 263153, India'],
+              ['Physical Address', 'Bajaj Dwar, Rudrapur – 263153, Uttarakhand, India'],
             ]}
           />
 
@@ -822,10 +822,10 @@ export default function Terms() {
                 <Building2 className="h-5 w-5 text-primary" />
               </div>
               <div className="text-sm leading-relaxed">
-                <p className="font-display font-semibold text-base">GoMilap Technologies Private Limited</p>
+                <p className="font-display font-semibold text-base">GoMilap</p>
                 <p className="text-muted-foreground">
                   Bajaj Dwar,<br />
-                  Rudrapur - 263153<br />
+                  Rudrapur – 263153<br />
                   Uttarakhand, India
                 </p>
               </div>
@@ -888,7 +888,7 @@ export default function Terms() {
                 Safe Connections. Meaningful Relationships.
               </p>
               <p className="text-sm text-muted-foreground">
-                Terms &amp; Conditions v2.0 — Last updated April 28, 2026
+                Terms &amp; Conditions v1.0 — Last updated April 28, 2026
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <Button asChild variant="outline" size="sm" className="rounded-full">
