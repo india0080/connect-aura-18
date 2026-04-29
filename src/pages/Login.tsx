@@ -122,6 +122,18 @@ export default function Login() {
         <Button type="button" variant="ghost" onClick={onMagic} disabled={magicLoading} className="w-full">
           {magicLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Send me a magic link instead'}
         </Button>
+
+        <p className="text-[11px] leading-relaxed text-muted-foreground text-center pt-2">
+          By continuing, you accept our{' '}
+          <Link to="/terms" className="underline hover:text-foreground">T&amp;C</Link>{' '}
+          and the{' '}
+          <Link to="/safety" className="underline hover:text-foreground">Safety Policy and Community Guidelines</Link>.
+          Please also review our{' '}
+          <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.
+          You agree to the processing of your location so that we can show you interesting people in your area.
+          You may revoke this consent at any time with effect for the future via the privacy settings of the app.
+          After signing in, you may receive offers from us via our newsletter, which you can unsubscribe from at any time.
+        </p>
       </form>
     </AuthLayout>
   );

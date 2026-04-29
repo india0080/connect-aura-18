@@ -118,6 +118,18 @@ export default function Signup() {
         <Button type="submit" disabled={submitting} className="w-full h-11 bg-gradient-brand text-primary-foreground hover:opacity-95 shadow-glow">
           {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Create account'}
         </Button>
+
+        <p className="text-[11px] leading-relaxed text-muted-foreground text-center pt-2">
+          By continuing, you accept our{' '}
+          <Link to="/terms" className="underline hover:text-foreground">T&amp;C</Link>{' '}
+          and the{' '}
+          <Link to="/safety" className="underline hover:text-foreground">Safety Policy and Community Guidelines</Link>.
+          Please also review our{' '}
+          <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.
+          You agree to the processing of your location so that we can show you interesting people in your area.
+          You may revoke this consent at any time with effect for the future via the privacy settings of the app.
+          After your registration, you may receive offers from us via our newsletter, which you can unsubscribe from at any time.
+        </p>
       </form>
     </AuthLayout>
   );
