@@ -124,38 +124,73 @@ export default function Chat() {
             <div className="p-3 space-y-2">
               {Array.from({ length: 5 }).map((_, i) => <Skeleton key={i} className="h-16 rounded-xl" />)}
             </div>
-          ) : convs.length === 0 ? (
-            <div className="p-8 text-center">
-              <MessageCircle className="h-10 w-10 mx-auto text-muted-foreground" />
-              <p className="text-sm text-muted-foreground mt-3">No conversations yet. Connect with people in Discover.</p>
-            </div>
           ) : (
-            <ul>
-              {convs.map((c) => {
-                const active = c.other.id === activeUserId;
-                return (
-                  <li key={c.other.id}>
-                    <Link to={`/dashboard/chat/${c.other.id}`}
-                      className={`flex items-center gap-3 px-4 py-3 hover:bg-secondary/60 transition-colors ${active ? 'bg-gradient-brand-soft' : ''}`}>
+            <>
+              {convs.length === 0 ? (
+                <div className="px-6 pt-6 pb-2 text-center">
+                  <MessageCircle className="h-9 w-9 mx-auto text-muted-foreground" />
+                  <p className="text-xs text-muted-foreground mt-2">No conversations yet. Connect with people in Discover.</p>
+                </div>
+              ) : (
+                <ul>
+                  {convs.map((c) => {
+                    const active = c.other.id === activeUserId;
+                    return (
+                      <li key={c.other.id}>
+                        <Link to={`/dashboard/chat/${c.other.id}`}
+                          className={`flex items-center gap-3 px-4 py-3 hover:bg-secondary/60 transition-colors ${active ? 'bg-gradient-brand-soft' : ''}`}>
+                          <Avatar className="h-12 w-12">
+                            <AvatarImage src={c.other.avatar_url ?? undefined} />
+                            <AvatarFallback className="bg-gradient-brand text-primary-foreground">{c.other.full_name[0]?.toUpperCase()}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-baseline justify-between gap-2">
+                              <p className="font-medium truncate">{c.other.full_name}</p>
+                              {c.lastMessage && <span className="text-[10px] text-muted-foreground shrink-0">{relTime(c.lastMessage.created_at)}</span>}
+                            </div>
+                            <div className="flex items-center justify-between gap-2">
+                              <p className="text-xs text-muted-foreground truncate">{c.lastMessage?.message ?? 'Say hi 👋'}</p>
+                              {c.unread > 0 && <span className="text-[10px] bg-gradient-brand text-primary-foreground rounded-full min-w-[18px] h-4.5 px-1 flex items-center justify-center">{c.unread}</span>}
+                            </div>
+                          </div>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+
+              {/* Sample chats — preview of GoMilap experience */}
+              <div className="mt-2 px-4 pt-3 pb-1 text-[11px] uppercase tracking-wider text-muted-foreground border-t border-border/60">
+                Sample chats
+              </div>
+              <ul>
+                {DEMO_PROFILES.map((d, i) => (
+                  <li key={d.id}>
+                    <button
+                      type="button"
+                      onClick={() => toast.info('This is a sample profile — connect with real members in Discover.')}
+                      className="w-full flex items-center gap-3 px-4 py-3 hover:bg-secondary/60 transition-colors text-left"
+                    >
                       <Avatar className="h-12 w-12">
-                        <AvatarImage src={c.other.avatar_url ?? undefined} />
-                        <AvatarFallback className="bg-gradient-brand text-primary-foreground">{c.other.full_name[0]?.toUpperCase()}</AvatarFallback>
+                        <AvatarImage src={d.avatar_url} alt={d.full_name} />
+                        <AvatarFallback className="bg-gradient-brand text-primary-foreground">{d.full_name[0]}</AvatarFallback>
                       </Avatar>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-baseline justify-between gap-2">
-                          <p className="font-medium truncate">{c.other.full_name}</p>
-                          {c.lastMessage && <span className="text-[10px] text-muted-foreground shrink-0">{relTime(c.lastMessage.created_at)}</span>}
+                          <p className="font-medium truncate">{d.full_name}</p>
+                          <span className="text-[10px] text-muted-foreground shrink-0">{i === 0 ? '2m' : i === 1 ? '15m' : `${i}h`}</span>
                         </div>
                         <div className="flex items-center justify-between gap-2">
-                          <p className="text-xs text-muted-foreground truncate">{c.lastMessage?.message ?? 'Say hi 👋'}</p>
-                          {c.unread > 0 && <span className="text-[10px] bg-gradient-brand text-primary-foreground rounded-full min-w-[18px] h-4.5 px-1 flex items-center justify-center">{c.unread}</span>}
+                          <p className="text-xs text-muted-foreground truncate">{d.bio}</p>
+                          <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-secondary text-muted-foreground border border-border/60 shrink-0">Sample</span>
                         </div>
                       </div>
-                    </Link>
+                    </button>
                   </li>
-                );
-              })}
-            </ul>
+                ))}
+              </ul>
+            </>
           )}
         </div>
       </aside>
