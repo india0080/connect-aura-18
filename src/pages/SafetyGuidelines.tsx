@@ -132,7 +132,7 @@ export default function SafetyGuidelines() {
 
         <article className="min-w-0">
           {/* 1 */}
-          <H2 id="introduction">1. Introduction</H2>
+          <H2 id="introduction" icon={FileText}>1. Introduction</H2>
           <H3>1.1 Purpose</H3>
           <P>
             GoMilap is a dating platform designed to help people find meaningful connections, friendships, and
@@ -160,7 +160,7 @@ export default function SafetyGuidelines() {
           </P>
 
           {/* 2 */}
-          <H2 id="content-guidelines">2. Content Guidelines</H2>
+          <H2 id="content-guidelines" icon={ImageIcon}>2. Content Guidelines</H2>
 
           <H3>2.1 Adult Content</H3>
           <Callout tone="warning" title="Prohibited">You may not post or stream content that is pornographic or intended to cause sexual arousal.</Callout>
@@ -257,7 +257,7 @@ export default function SafetyGuidelines() {
           </P>
 
           {/* 3 */}
-          <H2 id="conduct-rules">3. Conduct Rules</H2>
+          <H2 id="conduct-rules" icon={Users}>3. Conduct Rules</H2>
 
           <H3>3.1 Safety Threats and Abusive Conduct</H3>
           <P>You may not engage in, promote, threaten, or attempt conduct that creates a credible risk of harm to another person's physical or emotional safety. This includes threats of force or violence, stalking, harassment, coercion, exploitation, and any conduct that could reasonably lead to personal harm.</P>
@@ -325,7 +325,7 @@ export default function SafetyGuidelines() {
           </UL>
 
           {/* 4 */}
-          <H2 id="safety-features">4. Safety Features</H2>
+          <H2 id="safety-features" icon={ShieldCheck}>4. Safety Features</H2>
           <H3>4.1 In-App Safety Tools</H3>
           <UL>
             <li><strong>Block Users:</strong> Block specific users from contacting you or viewing your profile</li>
@@ -345,7 +345,7 @@ export default function SafetyGuidelines() {
           <P>If you experience sexual assault, domestic violence, stalking, or other serious harm, contact local law enforcement immediately.</P>
 
           {/* 5 */}
-          <H2 id="age-verification">5. Age Verification</H2>
+          <H2 id="age-verification" icon={UserCheck}>5. Age Verification</H2>
           <H3>5.1 Age Requirement</H3>
           <P>GoMilap is for adults only (18 years or older). We use age verification measures to confirm that members are at least 18 years old.</P>
           <H3>5.2 Verification Methods</H3>
@@ -364,7 +364,7 @@ export default function SafetyGuidelines() {
           <P>Additional information about how GoMilap processes biometric data is provided in our Privacy Policy and Biometric Data Notice.</P>
 
           {/* 6 */}
-          <H2 id="reporting">6. Reporting and Enforcement</H2>
+          <H2 id="reporting" icon={Flag}>6. Reporting and Enforcement</H2>
           <H3>6.1 How to Report</H3>
           <UL>
             <li><strong>In-App Reporting:</strong> Use the Report button on the content or profile</li>
@@ -416,7 +416,7 @@ export default function SafetyGuidelines() {
           </UL>
 
           {/* 7 */}
-          <H2 id="appeals">7. Appeals Process</H2>
+          <H2 id="appeals" icon={Scale}>7. Appeals Process</H2>
           <H3>7.1 Right to Appeal</H3>
           <P>If your account is suspended or terminated, you may request a review of the decision.</P>
           <H3>7.2 How to Appeal</H3>
@@ -437,7 +437,7 @@ export default function SafetyGuidelines() {
           <P>Users in the European Economic Area may also choose to use certified out-of-court dispute resolution bodies after exhausting internal remedies.</P>
 
           {/* 8 */}
-          <H2 id="privacy">8. Privacy and Data Protection</H2>
+          <H2 id="privacy" icon={Lock}>8. Privacy and Data Protection</H2>
           <H3>8.1 Data We Collect</H3>
           <UL>
             <li>Profile information</li>
@@ -472,7 +472,7 @@ export default function SafetyGuidelines() {
           </UL>
 
           {/* 9 */}
-          <H2 id="eea">9. Special Provisions for EEA Users</H2>
+          <H2 id="eea" icon={Globe2}>9. Special Provisions for EEA Users</H2>
           <H3>9.1 GDPR Compliance</H3>
           <P>For users in the European Economic Area, these Guidelines supplement the rights and obligations under GDPR.</P>
           <H3>9.2 Additional Rights</H3>
@@ -497,7 +497,7 @@ export default function SafetyGuidelines() {
           <P>If internal complaint resolution is unsatisfactory, EEA users may contact the EU Online Dispute Resolution Platform or any certified dispute resolution body.</P>
 
           {/* 10 */}
-          <H2 id="amendments">10. Amendments</H2>
+          <H2 id="amendments" icon={RefreshCw}>10. Amendments</H2>
           <H3>10.1 Updates</H3>
           <P>We may update these Guidelines periodically to reflect changes in our services, address emerging issues, and comply with legal requirements.</P>
           <H3>10.2 Notification</H3>
@@ -524,7 +524,7 @@ export default function SafetyGuidelines() {
           </div>
 
           {/* Appendix A */}
-          <H2 id="appendix-a">Appendix A · Quick Reference: Prohibited Content</H2>
+          <H2 id="appendix-a" icon={AlertTriangle}>Appendix A · Quick Reference: Prohibited Content</H2>
           <div className="overflow-x-auto rounded-2xl border border-border/60 my-4">
             <table className="w-full text-sm">
               <thead className="bg-muted/40">
@@ -547,7 +547,7 @@ export default function SafetyGuidelines() {
           </div>
 
           {/* Appendix B */}
-          <H2 id="appendix-b">Appendix B · Enforcement Quick Reference</H2>
+          <H2 id="appendix-b" icon={Flag}>Appendix B · Enforcement Quick Reference</H2>
           <div className="overflow-x-auto rounded-2xl border border-border/60 my-4">
             <table className="w-full text-sm">
               <thead className="bg-muted/40">
