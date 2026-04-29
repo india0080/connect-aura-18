@@ -1,29 +1,52 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ShieldCheck, AlertTriangle, Mail } from 'lucide-react';
+import {
+  ArrowLeft,
+  ShieldCheck,
+  AlertTriangle,
+  Mail,
+  FileText,
+  ImageIcon,
+  Users,
+  Lock,
+  UserCheck,
+  Flag,
+  Scale,
+  Globe2,
+  RefreshCw,
+} from 'lucide-react';
 import { Logo } from '@/components/common/Logo';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Button } from '@/components/ui/button';
 
 const TOC = [
-  { id: 'introduction', label: '1. Introduction' },
-  { id: 'content-guidelines', label: '2. Content Guidelines' },
-  { id: 'conduct-rules', label: '3. Conduct Rules' },
-  { id: 'safety-features', label: '4. Safety Features' },
-  { id: 'age-verification', label: '5. Age Verification' },
-  { id: 'reporting', label: '6. Reporting and Enforcement' },
-  { id: 'appeals', label: '7. Appeals Process' },
-  { id: 'privacy', label: '8. Privacy and Data Protection' },
-  { id: 'eea', label: '9. Special Provisions for EEA Users' },
-  { id: 'amendments', label: '10. Amendments' },
+  { id: 'introduction', label: '1. Introduction', icon: FileText },
+  { id: 'content-guidelines', label: '2. Content Guidelines', icon: ImageIcon },
+  { id: 'conduct-rules', label: '3. Conduct Rules', icon: Users },
+  { id: 'safety-features', label: '4. Safety Features', icon: ShieldCheck },
+  { id: 'age-verification', label: '5. Age Verification', icon: UserCheck },
+  { id: 'reporting', label: '6. Reporting and Enforcement', icon: Flag },
+  { id: 'appeals', label: '7. Appeals Process', icon: Scale },
+  { id: 'privacy', label: '8. Privacy and Data Protection', icon: Lock },
+  { id: 'eea', label: '9. Special Provisions for EEA Users', icon: Globe2 },
+  { id: 'amendments', label: '10. Amendments', icon: RefreshCw },
 ];
 
-function H2({ id, children }: { id: string; children: React.ReactNode }) {
+function H2({ id, icon: Icon, children }: { id: string; icon?: React.ElementType; children: React.ReactNode }) {
   return (
-    <h2 id={id} className="font-display font-bold text-3xl md:text-4xl mt-16 mb-5 scroll-mt-24">
+    <h2
+      id={id}
+      className="font-display font-bold text-3xl md:text-4xl mt-16 mb-5 scroll-mt-24 flex items-center gap-3"
+    >
+      {Icon && (
+        <span className="h-10 w-10 rounded-xl bg-gradient-brand flex items-center justify-center shadow-glow shrink-0">
+          <Icon className="h-5 w-5 text-primary-foreground" />
+        </span>
+      )}
       {children}
     </h2>
   );
 }
+
 
 function H3({ children }: { children: React.ReactNode }) {
   return <h3 className="font-display font-semibold text-xl md:text-2xl mt-8 mb-3">{children}</h3>;
