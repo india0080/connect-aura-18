@@ -1,24 +1,16 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from 'react-router-dom';
+import { Logo } from '@/components/common/Logo';
+import { Button } from '@/components/ui/button';
+import { PageMeta } from '@/components/common/PageMeta';
 
-const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
-
+export default function NotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <PageMeta title="Page not found — GoMilap" />
+      <Logo className="mb-8" />
+      <h1 className="text-7xl font-display font-bold text-gradient-brand">404</h1>
+      <p className="text-muted-foreground mt-3 max-w-sm">We couldn't find the page you're looking for.</p>
+      <Button asChild className="mt-6 bg-gradient-brand text-primary-foreground"><Link to="/">Back home</Link></Button>
     </div>
   );
-};
-
-export default NotFound;
+}
