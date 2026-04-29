@@ -68,6 +68,17 @@ export default function Discover() {
       .sort((a, b) => b.shared - a.shared || +new Date(b.p.created_at) - +new Date(a.p.created_at));
   }, [profiles, profile, search, interestFilter]);
 
+  const filteredDemos = useMemo(() => {
+    const pref = profile?.preference;
+    return DEMO_PROFILES.filter((d) => {
+      if (pref === 'men' && d.gender !== 'male') return false;
+      if (pref === 'women' && d.gender !== 'female') return false;
+      if (search && !d.full_name.toLowerCase().includes(search.toLowerCase())) return false;
+      if (interestFilter && !d.interests.includes(interestFilter)) return false;
+      return true;
+    });
+  }, [profile, search, interestFilter]);
+
   const sendRequest = async (otherId: string) => {
     if (!user) return;
     setBusyIds((s) => new Set(s).add(otherId));
