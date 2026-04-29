@@ -7,6 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { GuestRoute, ProtectedRoute } from "@/components/common/ProtectedRoute";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { SplashScreen } from "@/components/common/SplashScreen";
+import { SupportChatbot } from "@/components/common/SupportChatbot";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
@@ -41,6 +42,7 @@ const App = () => (
       <Sonner position="top-center" richColors closeButton />
       <SplashScreen />
       <BrowserRouter>
+        <SupportChatbot />
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
