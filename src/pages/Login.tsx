@@ -76,24 +76,24 @@ export default function Login() {
       footer={<>New here? <Link to="/signup" className="text-primary hover:underline">Create an account</Link></>}
     >
       <PageMeta title="Sign in — GoMilap" description="Welcome back to GoMilap." />
-      <h1 className="text-2xl font-display font-bold">Welcome back</h1>
-      <p className="text-sm text-muted-foreground mt-1">Sign in to continue your conversations.</p>
+      <h1 className="text-xl sm:text-2xl font-display font-bold">Welcome back</h1>
+      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Sign in to continue your conversations.</p>
 
-      <Button onClick={onGoogle} disabled={oauthLoading} variant="secondary" className="w-full mt-6 h-11 gap-2">
+      <Button onClick={onGoogle} disabled={oauthLoading} variant="secondary" className="w-full mt-4 h-10 gap-2">
         {oauthLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
         Continue with Google
       </Button>
 
-      <div className="flex items-center gap-3 my-5">
+      <div className="flex items-center gap-3 my-3">
         <Separator className="flex-1" />
         <span className="text-xs text-muted-foreground">or</span>
         <Separator className="flex-1" />
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         <div>
           <Label className="text-xs uppercase tracking-wide text-muted-foreground">Email</Label>
-          <Input className="mt-1.5" {...register('email')} type="email" autoComplete="email" />
+          <Input className="mt-1 h-10" {...register('email')} type="email" autoComplete="email" />
           {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
         </div>
         <div>
@@ -101,8 +101,8 @@ export default function Login() {
             <Label className="text-xs uppercase tracking-wide text-muted-foreground">Password</Label>
             <Link to="/forgot-password" className="text-xs text-primary hover:underline">Forgot?</Link>
           </div>
-          <div className="relative mt-1.5">
-            <Input {...register('password')} type={show ? 'text' : 'password'} autoComplete="current-password" />
+          <div className="relative mt-1">
+            <Input className="h-10" {...register('password')} type={show ? 'text' : 'password'} autoComplete="current-password" />
             <button type="button" onClick={() => setShow(!show)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
               {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -110,29 +110,31 @@ export default function Login() {
           {errors.password && <p className="text-xs text-destructive mt-1">{errors.password.message}</p>}
         </div>
 
-        <label className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Checkbox {...register('remember')} defaultChecked />
-          Remember me
-        </label>
+        <div className="flex items-center justify-between">
+          <label className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+            <Checkbox {...register('remember')} defaultChecked />
+            Remember me
+          </label>
+          <button
+            type="button"
+            onClick={onMagic}
+            disabled={magicLoading}
+            className="text-xs text-primary hover:underline disabled:opacity-50 inline-flex items-center gap-1"
+          >
+            {magicLoading ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
+            Magic link
+          </button>
+        </div>
 
-        <Button type="submit" disabled={submitting} className="w-full h-11 bg-gradient-brand text-primary-foreground hover:opacity-95 shadow-glow">
+        <Button type="submit" disabled={submitting} className="w-full h-10 bg-gradient-brand text-primary-foreground hover:opacity-95 shadow-glow">
           {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Sign in'}
         </Button>
 
-        <Button type="button" variant="ghost" onClick={onMagic} disabled={magicLoading} className="w-full">
-          {magicLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Send me a magic link instead'}
-        </Button>
-
-        <p className="text-[11px] leading-relaxed text-muted-foreground text-center pt-2">
+        <p className="text-[10px] leading-snug text-muted-foreground text-center">
           By continuing, you accept our{' '}
-          <Link to="/terms" className="underline hover:text-foreground">T&amp;C</Link>{' '}
-          and the{' '}
-          <Link to="/safety" className="underline hover:text-foreground">Safety Policy and Community Guidelines</Link>.
-          Please also review our{' '}
+          <Link to="/terms" className="underline hover:text-foreground">T&amp;C</Link>,{' '}
+          <Link to="/safety" className="underline hover:text-foreground">Community Guidelines</Link> and{' '}
           <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.
-          You agree to the processing of your location so that we can show you interesting people in your area.
-          You may revoke this consent at any time with effect for the future via the privacy settings of the app.
-          After signing in, you may receive offers from us via our newsletter, which you can unsubscribe from at any time.
         </p>
       </form>
     </AuthLayout>
