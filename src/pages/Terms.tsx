@@ -294,7 +294,7 @@ export default function Terms() {
           <P>
             By creating an account or using GoMilap, you agree to these Terms. They form a legally binding
             agreement between <strong className="text-foreground">you</strong> (the user) and{' '}
-            <strong className="text-foreground">GoMilap Technologies Private Limited</strong>.
+            <strong className="text-foreground">GoMilap</strong>.
           </P>
           <Callout tone="warn" icon={AlertTriangle} title="If you do not agree…">
             <p>Then please do not use GoMilap.</p>

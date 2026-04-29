@@ -71,7 +71,7 @@ export default function HealthDataPrivacy() {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Consumer Health Data Privacy Policy v3.0 — GoMilap"
+        title="Consumer Health Data Privacy Policy v1.0 — GoMilap"
         description="GoMilap collects only the minimum health-related data needed for matching and safety. No medical records. Encrypted. India-based servers. Full user rights."
       />
 
