@@ -182,8 +182,8 @@ export default function Privacy() {
           {/* Meta chips */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5 text-sm">
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
-              <span className="text-muted-foreground">Updated</span>{' '}
-              <strong className="text-foreground">April 28, 2026</strong>
+              <span className="text-muted-foreground">Last Updated</span>{' '}
+              <strong className="text-foreground">June 2025</strong>
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
               <span className="text-muted-foreground">Version</span>{' '}

@@ -91,7 +91,7 @@ export default function HealthDataPrivacy() {
           <div className="inline-flex h-16 w-16 rounded-2xl bg-gradient-brand items-center justify-center shadow-glow mb-6">
             <HeartPulse className="h-8 w-8 text-primary-foreground" />
           </div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Version 1.0 · Last Updated April 28, 2026</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Last Updated: June 2025 · Version 1.0</p>
           <h1 className="font-display font-bold text-4xl md:text-6xl leading-tight">
             Consumer Health Data <span className="text-gradient-brand">Privacy Policy</span>
           </h1>
@@ -115,7 +115,7 @@ export default function HealthDataPrivacy() {
               <Table>
                 <TableBody>
                   <TableRow><TableCell className="font-medium w-44">Version</TableCell><TableCell>1.0</TableCell></TableRow>
-                  <TableRow><TableCell className="font-medium">Last Updated</TableCell><TableCell>April 28, 2026</TableCell></TableRow>
+                  <TableRow><TableCell className="font-medium">Last Updated</TableCell><TableCell>June 2025</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Applicable Region</TableCell><TableCell>India (Primary) | International Users</TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">General Support</TableCell><TableCell><a href="mailto:support@gomilap.com" className="text-primary hover:underline">support@gomilap.com</a></TableCell></TableRow>
                   <TableRow><TableCell className="font-medium">Grievance Officer</TableCell><TableCell>Deepak — <a href="mailto:grievance@gomilap.com" className="text-primary hover:underline">grievance@gomilap.com</a></TableCell></TableRow>
@@ -508,7 +508,7 @@ export default function HealthDataPrivacy() {
                 GoMilap — Your Health Data, Your Privacy, Your Choice
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
-                Version 1.0 · Last Updated April 28, 2026
+                Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
               </p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm">
                 <a href="mailto:support@gomilap.com" className="text-primary hover:underline">support@gomilap.com</a>
