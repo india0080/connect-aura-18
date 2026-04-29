@@ -172,6 +172,8 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {user && <VerificationStatus user={user} profile={profile} />}
+
       <div className="glass rounded-2xl p-6 mt-6 border border-destructive/30">
         <h3 className="font-semibold text-destructive flex items-center gap-2"><Trash2 className="h-4 w-4" /> Danger zone</h3>
         <p className="text-sm text-muted-foreground mt-1">Permanently delete your profile data. This cannot be undone.</p>
