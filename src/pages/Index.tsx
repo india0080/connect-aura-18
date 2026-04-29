@@ -143,7 +143,7 @@ export default function Index() {
           </div>
 
           <div className="space-y-3">
-            <a href="#" className="block text-primary hover:opacity-80">Safety Policy &amp; Community Guidelines</a>
+            <Link to="/safety" className="block text-primary hover:opacity-80">Safety Policy &amp; Community Guidelines</Link>
             <a href="#" className="block text-primary hover:opacity-80">Compliance</a>
             <a href="#" className="block text-primary hover:opacity-80">Consumer Health Data Privacy</a>
             <a href="#" className="block text-primary hover:opacity-80">About Us</a>
