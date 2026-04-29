@@ -120,10 +120,15 @@ export default function SafetyGuidelines() {
         <aside className="lg:sticky lg:top-6 self-start">
           <div className="glass rounded-2xl p-5">
             <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Contents</p>
-            <nav className="flex flex-col gap-1.5 text-sm">
+            <nav className="flex flex-col gap-1 text-sm">
               {TOC.map((t) => (
-                <a key={t.id} href={`#${t.id}`} className="hover:text-primary transition-colors">
-                  {t.label}
+                <a
+                  key={t.id}
+                  href={`#${t.id}`}
+                  className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
+                >
+                  <t.icon className="h-3.5 w-3.5 text-primary shrink-0" />
+                  <span className="truncate">{t.label}</span>
                 </a>
               ))}
             </nav>
