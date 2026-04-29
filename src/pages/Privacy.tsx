@@ -1,10 +1,37 @@
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Mail, MapPin, Phone, Lock, Cookie, Users, Globe2, Baby, FileText } from 'lucide-react';
+import {
+  ArrowLeft,
+  ShieldCheck,
+  Mail,
+  Phone,
+  MapPin,
+  Lock,
+  Eye,
+  EyeOff,
+  Check,
+  X,
+  Database,
+  CreditCard,
+  Cookie,
+  Settings,
+  Trash2,
+  Clock,
+  Baby,
+  Scale,
+  Sparkles,
+  Gavel,
+  RefreshCw,
+  AlertTriangle,
+  FileText,
+  ChevronRight,
+  Heart,
+  Download,
+  Globe2,
+} from 'lucide-react';
 import { Logo } from '@/components/common/Logo';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import {
   Table,
   TableBody,
@@ -14,35 +41,102 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-const sections = [
-  { id: 'introduction', title: '1. Introduction & Scope' },
-  { id: 'information-we-collect', title: '2. Information We Collect' },
-  { id: 'how-we-use', title: '3. How We Use Your Information' },
-  { id: 'how-we-share', title: '4. How We Share Your Information' },
-  { id: 'cookies', title: '5. Cookies & Tracking Technologies' },
-  { id: 'your-rights', title: '6. Your Privacy Choices & Rights' },
-  { id: 'security', title: '7. Data Security' },
-  { id: 'retention', title: '8. Data Retention' },
-  { id: 'children', title: "9. Children's Privacy (Under 18)" },
-  { id: 'third-party', title: '10. Third-Party Links & Features' },
-  { id: 'transfers', title: '11. International Data Transfers' },
-  { id: 'changes', title: '12. Changes to This Policy' },
-  { id: 'grievance', title: '13. Grievance Redressal (India)' },
-  { id: 'contact', title: '14. Contact Us' },
-  { id: 'jurisdictions', title: '15. Specific Jurisdictions' },
-  { id: 'google-play', title: '16. Google Play Store Compliance' },
+const TOC = [
+  { id: 'introduction', label: '1. Introduction & Scope', icon: FileText },
+  { id: 'collect', label: '2. Information We Collect', icon: Database },
+  { id: 'use', label: '3. How We Use Your Information', icon: Settings },
+  { id: 'share', label: '4. How We Share Your Information', icon: Eye },
+  { id: 'payments', label: '5. Payments & Financial', icon: CreditCard },
+  { id: 'biometric', label: '6. Biometric & Age Verification', icon: ShieldCheck },
+  { id: 'cookies', label: '7. Cookies & Tracking', icon: Cookie },
+  { id: 'choices', label: '8. Your Privacy Choices', icon: Settings },
+  { id: 'security', label: '9. Data Security', icon: Lock },
+  { id: 'retention', label: '10. Data Retention', icon: Clock },
+  { id: 'children', label: "11. Children's Privacy", icon: Baby },
+  { id: 'liability', label: '12. User Responsibility & Liability', icon: Scale },
+  { id: 'design', label: '13. Privacy by Design', icon: Sparkles },
+  { id: 'grievance', label: '14. Grievance Redressal (India)', icon: Gavel },
+  { id: 'changes', label: '15. Changes to This Policy', icon: RefreshCw },
+  { id: 'contact', label: '16. Contact Us', icon: Mail },
 ];
 
-function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+function H2({ id, icon: Icon, children }: { id: string; icon: React.ElementType; children: React.ReactNode }) {
   return (
-    <h2 id={id} className="scroll-mt-24 font-display font-bold text-2xl md:text-3xl mt-12 mb-4 text-gradient-brand">
+    <h2
+      id={id}
+      className="font-display font-bold text-3xl md:text-4xl mt-16 mb-5 scroll-mt-24 flex items-center gap-3"
+    >
+      <span className="h-10 w-10 rounded-xl bg-gradient-brand flex items-center justify-center shadow-glow">
+        <Icon className="h-5 w-5 text-primary-foreground" />
+      </span>
       {children}
     </h2>
   );
 }
 
-function SubHeading({ children }: { children: React.ReactNode }) {
-  return <h3 className="font-display font-semibold text-xl mt-6 mb-3">{children}</h3>;
+function H3({ children }: { children: React.ReactNode }) {
+  return <h3 className="font-display font-semibold text-xl md:text-2xl mt-8 mb-3">{children}</h3>;
+}
+
+function P({ children }: { children: React.ReactNode }) {
+  return <p className="text-muted-foreground leading-relaxed mb-4">{children}</p>;
+}
+
+function UL({ children }: { children: React.ReactNode }) {
+  return (
+    <ul className="list-disc pl-6 space-y-1.5 text-muted-foreground mb-4 marker:text-primary">
+      {children}
+    </ul>
+  );
+}
+
+function Yes() {
+  return (
+    <span className="inline-flex items-center gap-1 text-emerald-400 font-medium">
+      <Check className="h-4 w-4" /> Yes
+    </span>
+  );
+}
+function No() {
+  return (
+    <span className="inline-flex items-center gap-1 text-destructive font-medium">
+      <X className="h-4 w-4" /> No
+    </span>
+  );
+}
+function Locked() {
+  return (
+    <span className="inline-flex items-center gap-1 text-amber-400 font-medium">
+      <Lock className="h-3.5 w-3.5" /> Private
+    </span>
+  );
+}
+
+function DataTable({ headers, rows }: { headers: string[]; rows: (string | React.ReactNode)[][] }) {
+  return (
+    <Card className="my-4 overflow-hidden">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {headers.map((h) => (
+              <TableHead key={h}>{h}</TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map((row, i) => (
+            <TableRow key={i}>
+              {row.map((cell, j) => (
+                <TableCell key={j} className={j === 0 ? 'font-medium text-foreground' : ''}>
+                  {cell}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Card>
+  );
 }
 
 export default function Privacy() {
@@ -50,382 +144,793 @@ export default function Privacy() {
     <div className="min-h-screen bg-background">
       <PageMeta
         title="Privacy Policy — GoMilap"
-        description="How GoMilap collects, uses, shares, and protects your personal information across India, EU, UK, US, and globally."
+        description="Simple, transparent privacy: what GoMilap collects, how we protect it, and the controls you have over your data."
       />
 
       {/* Header */}
-      <header className="px-6 py-5 border-b border-border/60 sticky top-0 z-30 backdrop-blur-xl bg-background/70">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link to="/"><Logo /></Link>
-          <Button asChild variant="secondary" className="rounded-full">
-            <Link to="/">Back to home</Link>
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Logo />
+          <Button asChild variant="ghost" size="sm">
+            <Link to="/">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to home
+            </Link>
           </Button>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="px-6 py-16 md:py-24 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-brand-soft blur-3xl opacity-40 -z-10" />
-        <Badge className="mb-5 bg-gradient-brand text-primary-foreground border-0">
-          <ShieldCheck className="h-3.5 w-3.5 mr-1.5" /> Last Updated: April 28, 2026
-        </Badge>
-        <h1 className="font-display font-bold text-4xl md:text-6xl max-w-3xl mx-auto leading-tight">
-          GoMilap <span className="text-gradient-brand">Privacy Policy</span>
-        </h1>
-        <p className="mt-5 text-muted-foreground text-lg max-w-2xl mx-auto">
-          We take your privacy seriously. This policy explains what we collect, how we use it, and the rights you have.
-        </p>
+      <section className="relative px-6 py-16 md:py-24 border-b border-border/60 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-brand-soft opacity-40" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-96 w-[120%] bg-gradient-brand opacity-10 blur-3xl rounded-full" />
+        <div className="relative max-w-4xl mx-auto text-center">
+          <div className="inline-flex h-16 w-16 rounded-2xl bg-gradient-brand items-center justify-center shadow-glow mb-6">
+            <ShieldCheck className="h-8 w-8 text-primary-foreground" />
+          </div>
+          <p className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-3">
+            Your Privacy · Our Priority
+          </p>
+          <h1 className="font-display font-bold text-4xl md:text-6xl leading-tight">
+            Privacy <span className="text-gradient-brand">Policy</span>
+          </h1>
+          <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Plain English. No legal jargon. Here's exactly what we collect, how we use it, and the controls
+            you have.
+          </p>
+
+          {/* Meta chips */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5 text-sm">
+            <span className="px-3 py-1.5 rounded-full glass border border-border/60">
+              <span className="text-muted-foreground">Updated</span>{' '}
+              <strong className="text-foreground">April 28, 2026</strong>
+            </span>
+            <span className="px-3 py-1.5 rounded-full glass border border-border/60">
+              <span className="text-muted-foreground">Version</span>{' '}
+              <strong className="text-foreground">2.0 — Simplified</strong>
+            </span>
+            <span className="px-3 py-1.5 rounded-full glass border border-border/60 inline-flex items-center gap-1.5">
+              <Globe2 className="h-3.5 w-3.5 text-primary" />
+              <strong className="text-foreground">India & Global</strong>
+            </span>
+          </div>
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Button asChild size="lg" className="bg-gradient-brand text-primary-foreground rounded-full shadow-glow">
+              <a href="#summary">Quick summary</a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full">
+              <a href="mailto:support@gomilap.com">
+                <Mail className="h-4 w-4 mr-2" />
+                Contact us
+              </a>
+            </Button>
+          </div>
+        </div>
       </section>
 
-      <div className="px-6 pb-24 max-w-6xl mx-auto grid lg:grid-cols-[260px_1fr] gap-10">
-        {/* TOC */}
-        <aside className="lg:sticky lg:top-28 self-start">
-          <Card className="glass">
-            <CardContent className="p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-                Table of Contents
-              </p>
-              <nav className="space-y-1.5 text-sm">
-                {sections.map((s) => (
-                  <a
-                    key={s.id}
-                    href={`#${s.id}`}
-                    className="block text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {s.title}
-                  </a>
-                ))}
-              </nav>
-            </CardContent>
-          </Card>
+      {/* Promise band */}
+      <section className="px-6 py-10 border-b border-border/60">
+        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { icon: FileText, label: 'Simple', desc: 'No complex legal jargon' },
+            { icon: Eye, label: 'Transparent', desc: 'We tell you what we collect' },
+            { icon: Lock, label: 'Secure', desc: 'Your data is protected' },
+            { icon: Scale, label: 'Fair', desc: "You're in control of what you share" },
+          ].map(({ icon: Icon, label, desc }) => (
+            <div key={label} className="flex items-start gap-3 p-4 rounded-xl glass">
+              <div className="h-10 w-10 rounded-lg bg-gradient-brand-soft flex items-center justify-center shrink-0">
+                <Icon className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <p className="font-display font-semibold">{label}</p>
+                <p className="text-sm text-muted-foreground">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Body */}
+      <div className="max-w-7xl mx-auto px-6 py-14 grid lg:grid-cols-[280px_1fr] gap-12">
+        {/* Sticky TOC */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-4">
+              Contents
+            </p>
+            <nav className="space-y-1 text-sm max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
+              {TOC.map(({ id, label, icon: Icon }) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-card hover:text-primary transition-colors text-muted-foreground"
+                >
+                  <Icon className="h-3.5 w-3.5 shrink-0" />
+                  <span className="truncate">{label}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
         </aside>
 
         {/* Content */}
-        <article className="prose prose-invert max-w-none">
+        <article className="max-w-3xl">
           {/* 1 */}
-          <SectionHeading id="introduction">1. Introduction &amp; Scope</SectionHeading>
-          <p className="text-muted-foreground leading-relaxed">
-            Welcome to GoMilap! This Privacy Policy explains how GoMilap ("we," "our," or "us") collects, uses, discloses,
-            and protects your personal information when you use our website, mobile application, and related services
-            (collectively, the "Services").
-          </p>
-          <p className="text-muted-foreground leading-relaxed mt-3">
-            GoMilap is a social networking platform for adults aged 18 and above. We are committed to protecting your privacy
-            and complying with applicable privacy laws, including:
-          </p>
-          <ul className="list-disc pl-6 mt-3 space-y-1 text-muted-foreground">
-            <li><strong>India:</strong> Information Technology Act, 2000 &amp; IT (Reasonable Security Practices) Rules, 2011</li>
-            <li><strong>European Union:</strong> General Data Protection Regulation (GDPR)</li>
-            <li><strong>United Kingdom:</strong> UK GDPR</li>
-            <li><strong>United States:</strong> California Consumer Privacy Act (CCPA)</li>
-            <li><strong>Global Best Practices:</strong> Google Play Store privacy requirements</li>
-          </ul>
-          <p className="text-muted-foreground leading-relaxed mt-3">
-            By using GoMilap, you consent to the collection and use of your information as described in this Privacy Policy.
-          </p>
+          <H2 id="introduction" icon={FileText}>
+            1. Introduction & Scope
+          </H2>
+          <P>
+            Welcome to GoMilap! This Privacy Policy explains how we collect, use, and protect your
+            personal information.
+          </P>
+          <P>
+            GoMilap is a social networking platform for adults aged{' '}
+            <strong className="text-foreground">18 years and above</strong>. By using GoMilap, you agree to the terms of this Privacy Policy.
+          </P>
+          <DataTable
+            headers={['Key Principle', 'Our Commitment']}
+            rows={[
+              ['Simple', 'No complex legal jargon'],
+              ['Transparent', 'We tell you exactly what we collect'],
+              ['Secure', 'Your data is protected'],
+              ['Fair', 'You are responsible for what you share'],
+            ]}
+          />
 
           {/* 2 */}
-          <SectionHeading id="information-we-collect">2. Information We Collect</SectionHeading>
+          <H2 id="collect" icon={Database}>
+            2. Information We Collect
+          </H2>
 
-          <SubHeading>2.1 Information You Provide Directly</SubHeading>
-          <Table>
-            <TableHeader>
-              <TableRow><TableHead>Category</TableHead><TableHead>Specific Information Collected</TableHead></TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Account Information</TableCell><TableCell>Name, email, phone, date of birth, gender, password</TableCell></TableRow>
-              <TableRow><TableCell>Profile Information</TableCell><TableCell>Profile photo, bio, interests, preferences</TableCell></TableRow>
-              <TableRow><TableCell>Payment Information</TableCell><TableCell>Payment method details, transaction history</TableCell></TableRow>
-              <TableRow><TableCell>Communications</TableCell><TableCell>Chat messages, friend requests, reports, feedback</TableCell></TableRow>
-              <TableRow><TableCell>Verification Data</TableCell><TableCell>Government ID (optional), facial scan (with consent)</TableCell></TableRow>
-            </TableBody>
-          </Table>
+          <H3>2.1 Information You Provide Directly</H3>
+          <DataTable
+            headers={['Category', 'Specific Information']}
+            rows={[
+              ['Account Info', 'Full name, email, phone number, date of birth, gender, password'],
+              ['Profile Info', 'Profile photo, bio, interests, preferences (men/women/everyone)'],
+              ['Communications', 'Chat messages, friend requests, reports, support inquiries'],
+              ['Verification Data', 'Government ID (if you choose to verify), selfie photo'],
+            ]}
+          />
 
-          <SubHeading>2.2 Information Collected Automatically</SubHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Category</TableHead><TableHead>Specific Information</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Device Information</TableCell><TableCell>Device model, OS, identifiers, IP address</TableCell></TableRow>
-              <TableRow><TableCell>Usage Information</TableCell><TableCell>Features used, time spent, pages, clicks, scroll</TableCell></TableRow>
-              <TableRow><TableCell>Location Information</TableCell><TableCell>Approximate (IP), precise (with consent)</TableCell></TableRow>
-              <TableRow><TableCell>Cookies &amp; Tracking</TableCell><TableCell>Session, analytics, advertising identifiers</TableCell></TableRow>
-            </TableBody>
-          </Table>
+          <H3>2.2 Information Collected Automatically</H3>
+          <DataTable
+            headers={['Category', 'Specific Information']}
+            rows={[
+              ['Device Info', 'Device model, operating system, IP address'],
+              ['Usage Info', 'Features used, time spent, pages viewed'],
+              ['Location', 'Approximate location (city level based on IP)'],
+            ]}
+          />
 
-          <SubHeading>2.3 Information from Third Parties</SubHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Source</TableHead><TableHead>Information Collected</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Google Login</TableCell><TableCell>Name, email, profile picture</TableCell></TableRow>
-              <TableRow><TableCell>Facebook Login</TableCell><TableCell>Name, email, profile picture, gender</TableCell></TableRow>
-              <TableRow><TableCell>Apple Sign-In</TableCell><TableCell>Name, email (private relay)</TableCell></TableRow>
-              <TableRow><TableCell>Payment Processors</TableCell><TableCell>Payment confirmation, billing details</TableCell></TableRow>
-            </TableBody>
-          </Table>
-
-          <SubHeading>2.4 Sensitive Personal Information (India Specific)</SubHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>SPDI Category</TableHead><TableHead>Collected?</TableHead><TableHead>Purpose</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Passwords</TableCell><TableCell>✅ Yes</TableCell><TableCell>Account security</TableCell></TableRow>
-              <TableRow><TableCell>Financial information</TableCell><TableCell>✅ Yes</TableCell><TableCell>Premium payments</TableCell></TableRow>
-              <TableRow><TableCell>Sexual orientation</TableCell><TableCell>✅ Yes</TableCell><TableCell>User preferences (consent)</TableCell></TableRow>
-              <TableRow><TableCell>Biometric information</TableCell><TableCell>✅ Yes</TableCell><TableCell>Age verification (consent)</TableCell></TableRow>
-              <TableRow><TableCell>Health / Medical records</TableCell><TableCell>❌ No</TableCell><TableCell>Not collected</TableCell></TableRow>
-            </TableBody>
-          </Table>
-
-          {/* 3 */}
-          <SectionHeading id="how-we-use">3. How We Use Your Information</SectionHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Purpose</TableHead><TableHead>India Basis</TableHead><TableHead>GDPR Basis</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Provide Services</TableCell><TableCell>Contract</TableCell><TableCell>Art. 6(1)(b)</TableCell></TableRow>
-              <TableRow><TableCell>Matching &amp; Discovery</TableCell><TableCell>Legitimate interest</TableCell><TableCell>Art. 6(1)(f)</TableCell></TableRow>
-              <TableRow><TableCell>Real-time Chat</TableCell><TableCell>Contract</TableCell><TableCell>Art. 6(1)(b)</TableCell></TableRow>
-              <TableRow><TableCell>Push Notifications</TableCell><TableCell>Consent</TableCell><TableCell>Art. 6(1)(a)</TableCell></TableRow>
-              <TableRow><TableCell>Email Marketing</TableCell><TableCell>Consent</TableCell><TableCell>Art. 6(1)(a)</TableCell></TableRow>
-              <TableRow><TableCell>Fraud Prevention</TableCell><TableCell>Legal obligation</TableCell><TableCell>Art. 6(1)(c)</TableCell></TableRow>
-              <TableRow><TableCell>Age Verification</TableCell><TableCell>Legal obligation</TableCell><TableCell>Art. 6(1)(c) + 9(2)</TableCell></TableRow>
-              <TableRow><TableCell>Analytics &amp; Improvement</TableCell><TableCell>Legitimate interest</TableCell><TableCell>Art. 6(1)(f)</TableCell></TableRow>
-              <TableRow><TableCell>Legal Compliance</TableCell><TableCell>Legal obligation</TableCell><TableCell>Art. 6(1)(c)</TableCell></TableRow>
-            </TableBody>
-          </Table>
-
-          {/* 4 */}
-          <SectionHeading id="how-we-share">4. How We Share Your Information</SectionHeading>
-          <SubHeading>4.1 Categories of Recipients</SubHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Recipient</TableHead><TableHead>Information</TableHead><TableHead>Purpose</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Other GoMilap Users</TableCell><TableCell>Profile, photos, bio, interests</TableCell><TableCell>Discovery &amp; matching</TableCell></TableRow>
-              <TableRow><TableCell>Service Providers</TableCell><TableCell>Account &amp; usage data</TableCell><TableCell>Hosting, analytics, payments</TableCell></TableRow>
-              <TableRow><TableCell>Advertising Partners</TableCell><TableCell>Device info, advertising ID</TableCell><TableCell>Targeted advertising</TableCell></TableRow>
-              <TableRow><TableCell>Law Enforcement</TableCell><TableCell>Account &amp; usage data</TableCell><TableCell>Legal compliance, court orders</TableCell></TableRow>
-              <TableRow><TableCell>Business Transfers</TableCell><TableCell>All relevant data</TableCell><TableCell>Merger, acquisition, sale</TableCell></TableRow>
-            </TableBody>
-          </Table>
-
-          <SubHeading>4.2 Information Visible to Other Users</SubHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Information</TableHead><TableHead>Visibility</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Profile photo, name, age, bio, interests</TableCell><TableCell>✅ Public to all users</TableCell></TableRow>
-              <TableRow><TableCell>Approximate location (city)</TableCell><TableCell>✅ Public</TableCell></TableRow>
-              <TableRow><TableCell>Exact location, email, phone</TableCell><TableCell>❌ Hidden</TableCell></TableRow>
-              <TableRow><TableCell>Chat messages</TableCell><TableCell>🔒 Only between participants</TableCell></TableRow>
-            </TableBody>
-          </Table>
-
-          <Card className="glass mt-6 border-primary/30">
-            <CardContent className="p-5 flex gap-3 items-start">
-              <ShieldCheck className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-              <p className="text-sm"><strong>We do not sell your personal information.</strong> We only share as described in this policy.</p>
+          <H3>2.3 What We DO NOT Collect</H3>
+          <Card className="border-destructive/30 bg-destructive/5 my-4">
+            <CardContent className="p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <X className="h-5 w-5 text-destructive" />
+                <p className="font-display font-semibold">Never collected</p>
+              </div>
+              <ul className="grid sm:grid-cols-2 gap-y-1.5 text-sm text-foreground/85">
+                {['Medical records', 'Health information', 'Caste information', 'Political opinions', 'Religious beliefs (unless you share in bio)'].map((x) => (
+                  <li key={x} className="flex items-center gap-2">
+                    <X className="h-4 w-4 text-destructive shrink-0" />
+                    {x}
+                  </li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
 
+          {/* 3 */}
+          <H2 id="use" icon={Settings}>
+            3. How We Use Your Information
+          </H2>
+          <DataTable
+            headers={['Purpose', 'Description']}
+            rows={[
+              ['Provide Services', 'Create your account, show your profile, enable matching'],
+              ['Real-time Chat', 'Deliver messages between users'],
+              ['Discover Feed', 'Show relevant profiles based on your preferences'],
+              ['Safety & Security', 'Detect fake accounts, prevent fraud, enforce policies'],
+              ['Customer Support', 'Respond to your inquiries and reports'],
+              ['Improvement', 'Analyze usage to make the app better'],
+              ['Legal Compliance', 'Respond to lawful requests from authorities'],
+            ]}
+          />
+          <Card className="bg-gradient-brand-soft border-primary/30 my-4">
+            <CardContent className="p-5 flex items-center gap-3">
+              <Check className="h-6 w-6 text-primary shrink-0" />
+              <p className="font-medium text-foreground">
+                We <strong>DO NOT</strong> sell your personal information to anyone.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* 4 */}
+          <H2 id="share" icon={Eye}>
+            4. How We Share Your Information
+          </H2>
+
+          <H3>4.1 Information Visible to Other Users</H3>
+          <DataTable
+            headers={['Your Info', 'Visible?']}
+            rows={[
+              ['Profile photo', <Yes />],
+              ['Name', <Yes />],
+              ['Age', <Yes />],
+              ['Bio', <Yes />],
+              ['Interests', <Yes />],
+              ['Approximate location (city)', <Yes />],
+              ['Email address', <No />],
+              ['Phone number', <No />],
+              ['Exact location', <No />],
+              ['Chat messages', <Locked />],
+            ]}
+          />
+
+          <H3>4.2 Information Shared with Service Providers</H3>
+          <DataTable
+            headers={['Provider Type', 'Purpose']}
+            rows={[
+              ['Cloud hosting', 'Store your data securely'],
+              ['Payment gateway', 'Process payments (Razorpay / Stripe)'],
+              ['Push notifications', 'Send app notifications'],
+              ['Analytics', 'Help us improve the app'],
+            ]}
+          />
+          <Card className="border-amber-500/30 bg-amber-500/5 my-4">
+            <CardContent className="p-5 flex items-start gap-3">
+              <AlertTriangle className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
+              <p className="text-sm text-foreground/90">
+                These service providers <strong>cannot</strong> use your data for their own purposes.
+              </p>
+            </CardContent>
+          </Card>
+
+          <H3>4.3 Legal & Safety Disclosures</H3>
+          <P>We may share your information when:</P>
+          <UL>
+            <li>Required by law (court order, police request)</li>
+            <li>Necessary to protect safety (imminent danger)</li>
+            <li>Needed to enforce our Terms of Service</li>
+          </UL>
+
           {/* 5 */}
-          <SectionHeading id="cookies">5. Cookies &amp; Tracking Technologies</SectionHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Cookie Type</TableHead><TableHead>Purpose</TableHead><TableHead>Consent</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Essential</TableCell><TableCell>Authentication, security, app functionality</TableCell><TableCell>❌ No</TableCell></TableRow>
-              <TableRow><TableCell>Preference</TableCell><TableCell>Language, theme, saved settings</TableCell><TableCell>✅ Yes</TableCell></TableRow>
-              <TableRow><TableCell>Analytics</TableCell><TableCell>Usage tracking, crash reporting</TableCell><TableCell>✅ Yes</TableCell></TableRow>
-              <TableRow><TableCell>Advertising</TableCell><TableCell>Targeted ads, campaign measurement</TableCell><TableCell>✅ Yes</TableCell></TableRow>
-            </TableBody>
-          </Table>
-          <p className="text-muted-foreground leading-relaxed mt-4">
-            Manage cookies via your browser, our in-app Cookie Consent Manager, or globally at{' '}
-            <a className="text-primary hover:underline" href="https://www.youronlinechoices.com" target="_blank" rel="noreferrer">
-              youronlinechoices.com
-            </a>.
-          </p>
+          <H2 id="payments" icon={CreditCard}>
+            5. Payments & Financial Information
+          </H2>
+          <P>For GoMilap Premium and paid features:</P>
+          <DataTable
+            headers={['Payment Method', 'How It Works']}
+            rows={[
+              ['Payment Gateway', 'Razorpay (India) / Stripe (International)'],
+              ['Card Details', 'We DO NOT store your card information'],
+              ['Transaction', 'Handled entirely by the payment gateway'],
+              ['Receipt', 'Sent to your registered email'],
+            ]}
+          />
+          <Card className="border-primary/30 bg-card/60 my-4">
+            <CardContent className="p-5 flex items-start gap-3">
+              <Lock className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+              <p className="text-sm text-foreground/90">
+                Your payment details go directly to the payment gateway.{' '}
+                <strong className="text-foreground">GoMilap never sees or stores your full card number.</strong>
+              </p>
+            </CardContent>
+          </Card>
 
           {/* 6 */}
-          <SectionHeading id="your-rights">6. Your Privacy Choices &amp; Rights</SectionHeading>
-          <SubHeading>Rights Available to All Users</SubHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Right</TableHead><TableHead>How to Exercise</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Access your data</TableCell><TableCell>Email privacy@gomilap.com</TableCell></TableRow>
-              <TableRow><TableCell>Correct information</TableCell><TableCell>In-app profile edit</TableCell></TableRow>
-              <TableRow><TableCell>Delete account &amp; data</TableCell><TableCell>Profile → Delete Account</TableCell></TableRow>
-              <TableRow><TableCell>Opt-out of marketing</TableCell><TableCell>Click "unsubscribe" in email</TableCell></TableRow>
-              <TableRow><TableCell>Withdraw consent</TableCell><TableCell>App Settings → Privacy</TableCell></TableRow>
-            </TableBody>
-          </Table>
-          <p className="text-muted-foreground leading-relaxed mt-4">
-            Additional rights apply for users in India (IT Act), EU/UK (GDPR — erasure, restriction, objection, portability,
-            complaint), and California (CCPA — know, delete, opt-out, non-discrimination).
-          </p>
+          <H2 id="biometric" icon={ShieldCheck}>
+            6. Biometric & Age Verification
+          </H2>
+          <P>
+            <strong className="text-foreground">Why we verify age:</strong> GoMilap is for adults 18+.
+            We must ensure no minors use our platform.
+          </P>
+
+          <H3>6.1 Verification Methods (with your consent)</H3>
+          <DataTable
+            headers={['Method', 'How It Works', 'Data Collected']}
+            rows={[
+              ['Face Scan', 'You take a selfie; AI estimates age', 'Facial image (temporary)'],
+              ['ID Upload', "Upload Aadhaar / Passport / Driver's License", 'ID document (verified, not stored)'],
+            ]}
+          />
+
+          <H3>6.2 Your Consent & Data Deletion</H3>
+          <DataTable
+            headers={['What We Promise', 'Status']}
+            rows={[
+              ['We ask for your consent before any scan', <Yes />],
+              ['You can say NO and use ID instead', <Yes />],
+              ['Facial data is NOT stored permanently', <Yes />],
+              ['ID documents are NOT stored permanently', <Yes />],
+              ['Only verification result (age confirmed) is stored', <Yes />],
+            ]}
+          />
+          <Card className="border-primary/30 bg-gradient-brand-soft my-4">
+            <CardContent className="p-5 flex items-start gap-3">
+              <EyeOff className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+              <p className="text-sm text-foreground/90">
+                We do <strong>NOT</strong> store your biometric data. It is used only for instant verification
+                and then deleted.
+              </p>
+            </CardContent>
+          </Card>
 
           {/* 7 */}
-          <SectionHeading id="security">7. Data Security</SectionHeading>
-          <ul className="list-disc pl-6 mt-3 space-y-1 text-muted-foreground">
-            <li><strong>Encryption:</strong> TLS 1.3 in transit, AES-256 at rest</li>
-            <li><strong>Access Controls:</strong> Role-based, MFA for employees</li>
-            <li><strong>Regular Audits:</strong> Quarterly assessments &amp; penetration testing</li>
-            <li><strong>Data Minimization:</strong> Collect only what is necessary</li>
-            <li><strong>Employee Training:</strong> Mandatory privacy &amp; security training</li>
-          </ul>
-          <p className="text-muted-foreground leading-relaxed mt-3">
-            In a data breach, we notify affected users and authorities within 72 hours as required under IT Rules and GDPR.
-          </p>
+          <H2 id="cookies" icon={Cookie}>
+            7. Cookies & Tracking
+          </H2>
+          <DataTable
+            headers={['Cookie Type', 'Purpose', 'Can You Disable?']}
+            rows={[
+              ['Essential', 'Login, app functionality', <No />],
+              ['Analytics', 'Improve app performance', <Yes />],
+              ['Advertising', 'Show relevant ads', <Yes />],
+            ]}
+          />
+          <P>How to manage cookies:</P>
+          <UL>
+            <li>Web browser: Settings → Privacy → Cookies</li>
+            <li>Mobile app: Settings → Privacy → Tracking</li>
+          </UL>
 
           {/* 8 */}
-          <SectionHeading id="retention">8. Data Retention</SectionHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Data Type</TableHead><TableHead>Retention Period</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Active account data</TableCell><TableCell>Duration of account + 30 days</TableCell></TableRow>
-              <TableRow><TableCell>Deleted account data</TableCell><TableCell>Permanently deleted within 90 days</TableCell></TableRow>
-              <TableRow><TableCell>Chat messages</TableCell><TableCell>Deleted with account</TableCell></TableRow>
-              <TableRow><TableCell>Transaction records</TableCell><TableCell>7 years (tax/legal)</TableCell></TableRow>
-              <TableRow><TableCell>Verification data</TableCell><TableCell>1 year or as required by law</TableCell></TableRow>
-              <TableRow><TableCell>Support tickets</TableCell><TableCell>2 years after resolution</TableCell></TableRow>
-              <TableRow><TableCell>Analytics data</TableCell><TableCell>26 months</TableCell></TableRow>
-            </TableBody>
-          </Table>
+          <H2 id="choices" icon={Settings}>
+            8. Your Privacy Choices
+          </H2>
+
+          <H3>8.1 What You Can Control</H3>
+          <DataTable
+            headers={['Action', 'How To']}
+            rows={[
+              ['Edit profile info', 'Profile → Edit'],
+              ['Change privacy settings', 'Settings → Privacy'],
+              ['Hide your profile', 'Settings → Privacy → Hide Profile'],
+              ['Block a user', 'User profile → Block'],
+              ['Delete your account', 'Profile → Delete Account'],
+              ['Download your data', 'Settings → Privacy → Download Data'],
+            ]}
+          />
+
+          <H3>8.2 Marketing Communications</H3>
+          <DataTable
+            headers={['Type', 'Can Opt-Out?']}
+            rows={[
+              ['Promotional emails', <Yes />],
+              ['Push notifications', <Yes />],
+              ['Important account updates', <No />],
+            ]}
+          />
 
           {/* 9 */}
-          <SectionHeading id="children">9. Children's Privacy (Under 18)</SectionHeading>
-          <Card className="glass border-destructive/40">
-            <CardContent className="p-5 flex gap-3 items-start">
-              <Baby className="h-5 w-5 text-destructive mt-0.5 shrink-0" />
-              <div className="text-sm">
-                <p><strong>GoMilap is strictly for users aged 18 and above.</strong></p>
-                <p className="text-muted-foreground mt-2">
-                  We do not knowingly collect data from anyone under 18. If we discover an underage user, we immediately
-                  delete the account and all associated data, and report to authorities where required.
-                </p>
-                <p className="text-muted-foreground mt-2">
-                  Parents/guardians: contact <a className="text-primary hover:underline" href="mailto:privacy@gomilap.com">privacy@gomilap.com</a>.
-                </p>
+          <H2 id="security" icon={Lock}>
+            9. Data Security
+          </H2>
+
+          <H3>9.1 Security Measures We Take</H3>
+          <DataTable
+            headers={['Measure', 'Implementation']}
+            rows={[
+              ['Encryption', 'TLS 1.3 for transfer, AES-256 for storage'],
+              ['Access Control', 'Only authorized employees can access data'],
+              ['Regular Audits', 'Security checks every quarter'],
+              ['Data Minimization', 'We only collect what we need'],
+            ]}
+          />
+
+          <H3>9.2 What YOU Must Do</H3>
+          <DataTable
+            headers={['Responsibility', 'Why']}
+            rows={[
+              ['Use a strong password', 'Prevents unauthorized access'],
+              ['Never share your password', 'We will never ask for it'],
+              ['Log out of shared devices', 'Protects your account'],
+              ['Report suspicious activity', 'support@gomilap.com'],
+            ]}
+          />
+
+          {/* 10 */}
+          <H2 id="retention" icon={Clock}>
+            10. Data Retention
+          </H2>
+          <DataTable
+            headers={['Data Type', 'How Long We Keep It']}
+            rows={[
+              ['Active account data', 'As long as your account is active'],
+              ['Deleted account data', 'Permanently deleted within 90 days'],
+              ['Chat messages', 'Deleted when both users delete account'],
+              ['Support tickets', '1 year after resolution'],
+              ['Transaction records', '7 years (tax / legal requirement)'],
+            ]}
+          />
+
+          {/* 11 */}
+          <H2 id="children" icon={Baby}>
+            11. Children's Privacy (Under 18)
+          </H2>
+          <Card className="border-destructive/40 bg-destructive/5 my-4">
+            <CardContent className="p-5 flex items-start gap-3">
+              <AlertTriangle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+              <p className="text-sm text-foreground/90">
+                <strong className="text-foreground">GoMilap is STRICTLY for users aged 18 and above.</strong>
+              </p>
+            </CardContent>
+          </Card>
+          <DataTable
+            headers={['If this happens…', 'We will…']}
+            rows={[
+              ['We discover a user under 18', 'Immediately delete their account'],
+              ['A parent reports an underage user', 'Verify and delete immediately'],
+              ['Anyone posts content with a minor', 'Remove content and report to authorities'],
+            ]}
+          />
+          <P>
+            If you are a parent and believe your child is using GoMilap, email{' '}
+            <a href="mailto:support@gomilap.com" className="text-primary hover:underline">
+              support@gomilap.com
+            </a>{' '}
+            with subject <strong className="text-foreground">"UNDERAGE USER"</strong>.
+          </P>
+
+          {/* 12 */}
+          <H2 id="liability" icon={Scale}>
+            12. User Responsibility & Liability
+          </H2>
+
+          <H3>12.1 You Are Responsible For What You Share</H3>
+          <P>
+            GoMilap is a platform where users connect with each other. You decide what information to share
+            with other users.
+          </P>
+          <DataTable
+            headers={['Scenario', 'Responsibility']}
+            rows={[
+              ['You share your phone number with a match', 'Your responsibility'],
+              ['You share your address', 'Your responsibility'],
+              ['You share personal photos', 'Your responsibility'],
+              ['You agree to meet someone offline', 'Your responsibility'],
+            ]}
+          />
+
+          <div className="grid md:grid-cols-2 gap-4 my-6">
+            <Card className="border-destructive/30 bg-destructive/5">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <X className="h-5 w-5 text-destructive" />
+                  <h4 className="font-display font-semibold">GoMilap is NOT liable for</h4>
+                </div>
+                <ul className="space-y-2 text-sm text-foreground/85">
+                  {[
+                    'Information you voluntarily share with users',
+                    'Actions of other users outside the platform',
+                    'Offline meetings arranged through the platform',
+                    'Misuse of information you chose to disclose',
+                  ].map((x) => (
+                    <li key={x} className="flex gap-2">
+                      <X className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+            <Card className="border-primary/30 bg-gradient-brand-soft">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <Check className="h-5 w-5 text-primary" />
+                  <h4 className="font-display font-semibold">GoMilap IS responsible for</h4>
+                </div>
+                <ul className="space-y-2 text-sm text-foreground/85">
+                  {[
+                    'Protecting your data from breaches',
+                    'Following this Privacy Policy',
+                    'Responding to your grievances promptly',
+                    'Removing reported inappropriate content',
+                  ].map((x) => (
+                    <li key={x} className="flex gap-2">
+                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+          <Card className="bg-card/60 border-primary/20">
+            <CardContent className="p-5 text-center">
+              <p className="font-display font-semibold text-lg">
+                We build <span className="text-gradient-brand">SAFE</span> tools. You make{' '}
+                <span className="text-gradient-brand">SMART</span> choices.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* 13 */}
+          <H2 id="design" icon={Sparkles}>
+            13. Privacy by Design
+          </H2>
+          <P>
+            Privacy by Design means we build privacy into our app from the ground up — not as an
+            afterthought.
+          </P>
+          <DataTable
+            headers={['Principle', 'How GoMilap Implements It']}
+            rows={[
+              ['Proactive, not reactive', 'We prevent privacy issues before they happen'],
+              ['Privacy as default', 'Your profile is NOT public on the internet'],
+              ['Embedded into design', 'Privacy settings are easy to find'],
+              ['Full functionality', 'Use the app without sharing unnecessary data'],
+              ['End-to-end security', 'Your data is protected at every step'],
+              ['Transparency', 'This policy tells you everything'],
+              ['User control', 'You can delete your data anytime'],
+            ]}
+          />
+          <P className="text-sm">
+            <strong className="text-foreground">Example:</strong> We don't ask for your exact location.
+            City-level only. Your exact location stays on your phone.
+          </P>
+
+          {/* 14 */}
+          <H2 id="grievance" icon={Gavel}>
+            14. Grievance Redressal (India)
+          </H2>
+          <P>
+            As required under the Information Technology (Intermediary Guidelines) Rules, 2021:
+          </P>
+
+          <H3>14.1 Grievance Officer</H3>
+          <Card className="border-primary/30 my-4">
+            <CardContent className="p-6 grid sm:grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Designation</p>
+                <p className="font-medium mt-1">Grievance Officer</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Email</p>
+                <a href="mailto:grievance@gomilap.com" className="text-primary font-medium hover:underline mt-1 block">
+                  grievance@gomilap.com
+                </a>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Response Time</p>
+                <p className="font-medium mt-1">Within 24 hours</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Resolution Time</p>
+                <p className="font-medium mt-1">Within 15 days</p>
               </div>
             </CardContent>
           </Card>
 
-          {/* 10 */}
-          <SectionHeading id="third-party">10. Third-Party Links &amp; Features</SectionHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Third Party</TableHead><TableHead>Feature</TableHead><TableHead>Privacy Policy</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Google</TableCell><TableCell>Login, Analytics, Ads</TableCell><TableCell>policies.google.com/privacy</TableCell></TableRow>
-              <TableRow><TableCell>Facebook</TableCell><TableCell>Login</TableCell><TableCell>facebook.com/policy.php</TableCell></TableRow>
-              <TableRow><TableCell>Apple</TableCell><TableCell>Sign-in with Apple</TableCell><TableCell>apple.com/legal/privacy</TableCell></TableRow>
-              <TableRow><TableCell>Razorpay</TableCell><TableCell>Payments (India)</TableCell><TableCell>razorpay.com/privacy</TableCell></TableRow>
-              <TableRow><TableCell>Stripe</TableCell><TableCell>Payments (Global)</TableCell><TableCell>stripe.com/privacy</TableCell></TableRow>
-            </TableBody>
-          </Table>
+          <H3>14.2 How to File a Grievance</H3>
+          <ol className="space-y-2.5 mb-4">
+            {[
+              'Email to grievance@gomilap.com',
+              'Subject: "Grievance — [Your Username]"',
+              'Include your registered email and phone number',
+              'Describe the issue clearly',
+              'Attach screenshots (if applicable)',
+            ].map((step, i) => (
+              <li key={i} className="flex gap-3 text-foreground/90">
+                <span className="h-6 w-6 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-semibold flex items-center justify-center">
+                  {i + 1}
+                </span>
+                {step}
+              </li>
+            ))}
+          </ol>
 
-          {/* 11 */}
-          <SectionHeading id="transfers">11. International Data Transfers</SectionHeading>
-          <p className="text-muted-foreground leading-relaxed">
-            Your information may be stored and processed on servers in India (primary), the United States (backup, analytics),
-            and the European Union (EU user data). Cross-border transfers from EU/UK to India use Standard Contractual Clauses
-            (SCCs) and the UK Addendum where applicable. Indian user data is hosted on local servers as required.
-          </p>
-
-          {/* 12 */}
-          <SectionHeading id="changes">12. Changes to This Policy</SectionHeading>
-          <p className="text-muted-foreground leading-relaxed">
-            Minor changes are reflected by an updated "Last Updated" date and in-app notice. Material changes are announced
-            via email and an in-app popup with 30 days advance notice. Continued use after the effective date constitutes
-            acceptance of the updated policy.
-          </p>
-
-          {/* 13 */}
-          <SectionHeading id="grievance">13. Grievance Redressal (India Specific)</SectionHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Detail</TableHead><TableHead>Information</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Designation</TableCell><TableCell>Privacy &amp; Compliance Officer</TableCell></TableRow>
-              <TableRow><TableCell>Email</TableCell><TableCell>grievance@gomilap.com</TableCell></TableRow>
-              <TableRow><TableCell>Acknowledgment</TableCell><TableCell>Within 24 hours</TableCell></TableRow>
-              <TableRow><TableCell>Resolution</TableCell><TableCell>Within 15 days</TableCell></TableRow>
-            </TableBody>
-          </Table>
-          <p className="text-muted-foreground leading-relaxed mt-3">
-            Email grievance@gomilap.com with subject "Privacy Grievance — [Your Username]". If unsatisfied, you may escalate
-            to the Ministry of Electronics &amp; Information Technology (MeitY) or seek legal remedies under the IT Act, 2000.
-          </p>
-
-          {/* 14 */}
-          <SectionHeading id="contact">14. Contact Us</SectionHeading>
-          <div className="grid sm:grid-cols-2 gap-4 mt-4">
-            <Card className="glass"><CardContent className="p-5 flex gap-3 items-start">
-              <Mail className="h-5 w-5 text-primary mt-0.5" />
-              <div><p className="font-semibold">General Privacy</p><p className="text-sm text-muted-foreground">privacy@gomilap.com</p></div>
-            </CardContent></Card>
-            <Card className="glass"><CardContent className="p-5 flex gap-3 items-start">
-              <ShieldCheck className="h-5 w-5 text-primary mt-0.5" />
-              <div><p className="font-semibold">Data Protection Officer</p><p className="text-sm text-muted-foreground">dpo@gomilap.com</p></div>
-            </CardContent></Card>
-            <Card className="glass"><CardContent className="p-5 flex gap-3 items-start">
-              <Globe2 className="h-5 w-5 text-primary mt-0.5" />
-              <div><p className="font-semibold">EU Representative</p><p className="text-sm text-muted-foreground">eu-representative@gomilap.com</p></div>
-            </CardContent></Card>
-            <Card className="glass"><CardContent className="p-5 flex gap-3 items-start">
-              <Globe2 className="h-5 w-5 text-primary mt-0.5" />
-              <div><p className="font-semibold">UK Representative</p><p className="text-sm text-muted-foreground">uk-representative@gomilap.com</p></div>
-            </CardContent></Card>
-          </div>
+          <H3>14.3 Escalation</H3>
+          <P>If you are not satisfied with the Grievance Officer's resolution:</P>
+          <DataTable
+            headers={['Option', 'Details']}
+            rows={[
+              ['MeitY', 'Ministry of Electronics & Information Technology'],
+              ['Cyber Appellate Tribunal', 'Legal recourse under IT Act, 2000'],
+              ['Courts', 'Civil or criminal proceedings as applicable'],
+            ]}
+          />
 
           {/* 15 */}
-          <SectionHeading id="jurisdictions">15. Additional Information for Specific Jurisdictions</SectionHeading>
-          <SubHeading>California (CCPA)</SubHeading>
-          <p className="text-muted-foreground leading-relaxed">
-            Right to know, delete, opt-out of "sales/sharing" (we do not sell), and non-discrimination. To exercise: call
-            1-800-GOMILAP or email privacy@gomilap.com.
-          </p>
-          <SubHeading>EU/EEA (GDPR) &amp; UK (UK GDPR)</SubHeading>
-          <p className="text-muted-foreground leading-relaxed">
-            You have the right to lodge a complaint with your local supervisory authority. UK users may contact the ICO
-            at casework@ico.org.uk or +44 (0)303 123 1113.
-          </p>
-          <SubHeading>Brazil (LGPD)</SubHeading>
-          <p className="text-muted-foreground leading-relaxed">
-            We comply with Lei Geral de Proteção de Dados. Inquiries: lgpd@gomilap.com.
-          </p>
+          <H2 id="changes" icon={RefreshCw}>
+            15. Changes to This Policy
+          </H2>
+          <DataTable
+            headers={['Change Type', 'Notification Method']}
+            rows={[
+              ['Minor updates', 'In-app notice + updated "Last Updated" date'],
+              ['Major changes', 'Email to registered email + in-app popup'],
+            ]}
+          />
+          <P className="text-sm">
+            By continuing to use GoMilap after changes, you agree to the updated policy.
+          </P>
 
           {/* 16 */}
-          <SectionHeading id="google-play">16. Google Play Store Compliance Statement</SectionHeading>
-          <Table>
-            <TableHeader><TableRow><TableHead>Google Requirement</TableHead><TableHead>GoMilap Compliance</TableHead></TableRow></TableHeader>
-            <TableBody>
-              <TableRow><TableCell>Privacy Policy required</TableCell><TableCell>✅ This document</TableCell></TableRow>
-              <TableRow><TableCell>Disclose data collection</TableCell><TableCell>✅ Section 2</TableCell></TableRow>
-              <TableRow><TableCell>Secure data transmission</TableCell><TableCell>✅ TLS 1.3</TableCell></TableRow>
-              <TableRow><TableCell>No deceptive practices</TableCell><TableCell>✅ Transparent policies</TableCell></TableRow>
-              <TableRow><TableCell>User data deletion</TableCell><TableCell>✅ Profile → Delete Account</TableCell></TableRow>
-              <TableRow><TableCell>Age verification</TableCell><TableCell>✅ Face scan / ID verification</TableCell></TableRow>
-              <TableRow><TableCell>No minor exposure</TableCell><TableCell>✅ 18+ only, enforced</TableCell></TableRow>
-            </TableBody>
-          </Table>
+          <H2 id="contact" icon={Mail}>
+            16. Contact Us
+          </H2>
+
+          <H3>16.1 Only 2 Email IDs</H3>
+          <div className="grid md:grid-cols-2 gap-4 my-4">
+            <Card className="hover:border-primary/40 transition-colors">
+              <CardContent className="p-5">
+                <div className="h-10 w-10 rounded-lg bg-gradient-brand-soft flex items-center justify-center mb-3">
+                  <Mail className="h-5 w-5 text-primary" />
+                </div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">All inquiries</p>
+                <p className="text-sm text-muted-foreground mb-2">Support · Safety · Reports · Appeals · Data requests</p>
+                <a href="mailto:support@gomilap.com" className="text-primary font-medium hover:underline">
+                  support@gomilap.com
+                </a>
+              </CardContent>
+            </Card>
+            <Card className="hover:border-primary/40 transition-colors">
+              <CardContent className="p-5">
+                <div className="h-10 w-10 rounded-lg bg-gradient-brand-soft flex items-center justify-center mb-3">
+                  <Gavel className="h-5 w-5 text-primary" />
+                </div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Grievance Officer (India)</p>
+                <p className="text-sm text-muted-foreground mb-2">For formal IT-Act grievances</p>
+                <a href="mailto:grievance@gomilap.com" className="text-primary font-medium hover:underline">
+                  grievance@gomilap.com
+                </a>
+              </CardContent>
+            </Card>
+          </div>
+          <P className="text-sm">📧 We respond to every email within 24 hours.</P>
+
+          <H3>16.2 India Address (Registered Office)</H3>
+          <Card className="my-4">
+            <CardContent className="p-5 flex items-start gap-3">
+              <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+              <address className="not-italic text-sm leading-relaxed">
+                <strong className="text-foreground">GoMilap Technologies Private Limited</strong>
+                <br />
+                Bajaj Dwar,
+                <br />
+                Rudrapur — 263153
+                <br />
+                Uttarakhand, India
+              </address>
+            </CardContent>
+          </Card>
+
+          <H3>16.3 Emergency Numbers (India)</H3>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 my-4">
+            {[
+              { label: 'National Emergency', n: '112' },
+              { label: 'Police', n: '100' },
+              { label: 'Women Helpline', n: '181' },
+              { label: 'Child Helpline', n: '1098' },
+              { label: 'Cyber Crime', n: '1930' },
+            ].map(({ label, n }) => (
+              <Card key={n} className="text-center">
+                <CardContent className="p-4">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">{label}</p>
+                  <p className="font-display font-bold text-2xl text-gradient-brand mt-1">{n}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <Card className="border-destructive/40 bg-destructive/5 my-4">
+            <CardContent className="p-5 flex items-start gap-3">
+              <AlertTriangle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+              <p className="text-sm text-foreground/90">
+                <strong className="text-foreground">GoMilap is NOT an emergency service.</strong> If you are
+                in immediate danger, call <strong>112</strong>.
+              </p>
+            </CardContent>
+          </Card>
 
           {/* Quick Summary */}
-          <div className="mt-12 p-6 rounded-2xl bg-gradient-brand-soft border border-primary/20">
-            <h3 className="font-display font-semibold text-xl mb-4 flex items-center gap-2">
-              <FileText className="h-5 w-5" /> Quick Summary
-            </h3>
-            <Table>
-              <TableHeader><TableRow><TableHead>Question</TableHead><TableHead>Answer</TableHead></TableRow></TableHeader>
-              <TableBody>
-                <TableRow><TableCell>What data do you collect?</TableCell><TableCell>Name, email, age, gender, photos, bio, interests, chats</TableCell></TableRow>
-                <TableRow><TableCell>Who can see my data?</TableCell><TableCell>Other users see profile info. Email/phone hidden.</TableCell></TableRow>
-                <TableRow><TableCell>Can I delete my data?</TableCell><TableCell>Yes → Profile → Delete Account</TableCell></TableRow>
-                <TableRow><TableCell>Do you sell my data?</TableCell><TableCell>No, never.</TableCell></TableRow>
-                <TableRow><TableCell>Is my chat private?</TableCell><TableCell>Yes, only between you and recipient.</TableCell></TableRow>
-                <TableRow><TableCell>How do I contact support?</TableCell><TableCell>privacy@gomilap.com or grievance@gomilap.com</TableCell></TableRow>
-              </TableBody>
-            </Table>
-          </div>
+          <section id="summary" className="scroll-mt-24 mt-20">
+            <div className="rounded-3xl bg-gradient-brand p-[1px] shadow-glow">
+              <div className="rounded-3xl bg-card p-8">
+                <div className="flex items-center gap-3 mb-5">
+                  <Sparkles className="h-6 w-6 text-primary" />
+                  <h3 className="font-display font-bold text-2xl">Quick Summary</h3>
+                </div>
+                <Table>
+                  <TableBody>
+                    {[
+                      ['What data do you collect?', 'Name, email, phone, age, photo, bio, interests'],
+                      ['Do you sell my data?', <No />],
+                      ['Can I delete my data?', <Yes />],
+                      ['Who can see my profile?', 'Other GoMilap users (18+)'],
+                      ['Is my chat private?', <Yes />],
+                      ['How do I report a problem?', 'support@gomilap.com'],
+                      ['How to file a grievance?', 'grievance@gomilap.com'],
+                      ['Where is your office?', 'Rudrapur, India'],
+                    ].map(([q, a], i) => (
+                      <TableRow key={i}>
+                        <TableCell className="font-medium text-foreground w-1/2">{q}</TableCell>
+                        <TableCell>{a}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          </section>
 
-          <p className="text-center text-sm text-muted-foreground mt-12">
-            GoMilap — Building Trust, One Connection at a Time 💜💗 <br />
-            This Privacy Policy was last updated on April 28, 2026.
-          </p>
+          {/* Declaration */}
+          <section className="mt-12">
+            <h3 className="font-display font-bold text-2xl mb-5 flex items-center gap-2">
+              <ShieldCheck className="h-6 w-6 text-primary" />
+              Declaration
+            </h3>
+            <P>GoMilap hereby confirms that:</P>
+            <ul className="space-y-2.5 mb-6">
+              {[
+                'This Privacy Policy is complete and accurate',
+                'We comply with Indian IT Act, 2000 and IT Rules, 2021',
+                'We do NOT sell user data',
+                'We do NOT store biometric data permanently',
+                'We do NOT store payment card details',
+                'Users are responsible for information they share',
+                'Privacy by Design is followed',
+                'Grievance Officer is available at grievance@gomilap.com',
+              ].map((x) => (
+                <li key={x} className="flex gap-3 text-foreground/90">
+                  <Check className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
+                  {x}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* Promise footer */}
+          <Card className="mt-10 border-primary/40 bg-gradient-brand-soft overflow-hidden">
+            <CardContent className="p-8 text-center">
+              <Heart className="h-8 w-8 mx-auto text-primary mb-3" />
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
+                Your Privacy, Our Priority 🇮🇳💜
+              </p>
+              <p className="font-display font-bold text-2xl md:text-3xl text-gradient-brand">
+                Building Trust in India, for India — and the World
+              </p>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-sm">
+                <a href="mailto:support@gomilap.com" className="text-primary hover:underline inline-flex items-center gap-1.5">
+                  <Mail className="h-4 w-4" /> support@gomilap.com
+                </a>
+                <span className="text-muted-foreground">·</span>
+                <a href="mailto:grievance@gomilap.com" className="text-primary hover:underline inline-flex items-center gap-1.5">
+                  <Gavel className="h-4 w-4" /> grievance@gomilap.com
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Cross-links */}
+          <div className="mt-10 grid sm:grid-cols-2 gap-4">
+            <Link to="/safety-code" className="group">
+              <Card className="h-full hover:border-primary/40 transition-colors">
+                <CardContent className="p-5 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <ShieldCheck className="h-5 w-5 text-primary" />
+                    <span className="font-medium">Online Safety Code</span>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/compliance" className="group">
+              <Card className="h-full hover:border-primary/40 transition-colors">
+                <CardContent className="p-5 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <FileText className="h-5 w-5 text-primary" />
+                    <span className="font-medium">Compliance Statement</span>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
         </article>
       </div>
     </div>
