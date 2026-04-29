@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { INTERESTS } from '@/lib/constants';
+import { DEMO_PROFILES, type DemoProfile } from '@/lib/demoProfiles';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
