@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Search, Loader2, Check, Clock, UserPlus, Users } from 'lucide-react';
+import { Search, Loader2, Check, Clock, UserPlus, Users, MapPin, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { INTERESTS } from '@/lib/constants';
+import { DEMO_PROFILES, type DemoProfile } from '@/lib/demoProfiles';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -67,6 +68,17 @@ export default function Discover() {
       .sort((a, b) => b.shared - a.shared || +new Date(b.p.created_at) - +new Date(a.p.created_at));
   }, [profiles, profile, search, interestFilter]);
 
+  const filteredDemos = useMemo(() => {
+    const pref = profile?.preference;
+    return DEMO_PROFILES.filter((d) => {
+      if (pref === 'men' && d.gender !== 'male') return false;
+      if (pref === 'women' && d.gender !== 'female') return false;
+      if (search && !d.full_name.toLowerCase().includes(search.toLowerCase())) return false;
+      if (interestFilter && !d.interests.includes(interestFilter)) return false;
+      return true;
+    });
+  }, [profile, search, interestFilter]);
+
   const sendRequest = async (otherId: string) => {
     if (!user) return;
     setBusyIds((s) => new Set(s).add(otherId));
@@ -118,56 +130,125 @@ export default function Discover() {
       ) : filtered.length === 0 ? (
         <EmptyState />
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
-          {filtered.map(({ p, shared }) => {
-            const status = statusFor(p.id);
-            const busy = busyIds.has(p.id);
-            return (
-              <article key={p.id} className="glass rounded-2xl p-4 flex flex-col animate-fade-in hover:-translate-y-0.5 transition-transform">
-                <div className="flex items-center gap-3">
-                  <Avatar className="h-14 w-14 ring-2 ring-border">
-                    <AvatarImage src={p.avatar_url ?? undefined} />
-                    <AvatarFallback className="bg-gradient-brand text-primary-foreground">{p.full_name?.[0]?.toUpperCase() ?? '?'}</AvatarFallback>
-                  </Avatar>
-                  <div className="min-w-0">
-                    <p className="font-semibold truncate">{p.full_name}</p>
-                    {shared > 0 && (
-                      <p className="text-xs text-primary">{shared} shared interest{shared > 1 ? 's' : ''}</p>
-                    )}
-                  </div>
-                </div>
-                {p.bio && <p className="text-sm text-muted-foreground mt-3 line-clamp-2">{p.bio}</p>}
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {(p.interests ?? []).slice(0, 3).map((i) => (
-                    <span key={i} className="text-[11px] px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground">{i}</span>
-                  ))}
-                </div>
-                <div className="mt-auto pt-4">
-                  {status === 'none' && (
-                    <Button onClick={() => sendRequest(p.id)} disabled={busy} className="w-full bg-gradient-brand text-primary-foreground gap-1.5">
-                      {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <><UserPlus className="h-4 w-4" /> Connect</>}
-                    </Button>
-                  )}
-                  {status === 'pending-out' && (
-                    <Button disabled variant="secondary" className="w-full gap-1.5"><Clock className="h-4 w-4" /> Pending</Button>
-                  )}
-                  {status === 'pending-in' && (
-                    <Button asChild variant="secondary" className="w-full gap-1.5">
-                      <Link to="/dashboard/friends"><Users className="h-4 w-4" /> Respond</Link>
-                    </Button>
-                  )}
-                  {status === 'friends' && (
-                    <Button asChild variant="secondary" className="w-full gap-1.5">
-                      <Link to={`/dashboard/chat/${p.id}`}><Check className="h-4 w-4" /> Message</Link>
-                    </Button>
-                  )}
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <>
+          {filtered.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+              {filtered.map(({ p, shared }) => {
+                const status = statusFor(p.id);
+                const busy = busyIds.has(p.id);
+                return (
+                  <article key={p.id} className="glass rounded-2xl p-4 flex flex-col animate-fade-in hover:-translate-y-0.5 transition-transform">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-14 w-14 ring-2 ring-border">
+                        <AvatarImage src={p.avatar_url ?? undefined} />
+                        <AvatarFallback className="bg-gradient-brand text-primary-foreground">{p.full_name?.[0]?.toUpperCase() ?? '?'}</AvatarFallback>
+                      </Avatar>
+                      <div className="min-w-0">
+                        <p className="font-semibold truncate">{p.full_name}</p>
+                        {shared > 0 && (
+                          <p className="text-xs text-primary">{shared} shared interest{shared > 1 ? 's' : ''}</p>
+                        )}
+                      </div>
+                    </div>
+                    {p.bio && <p className="text-sm text-muted-foreground mt-3 line-clamp-2">{p.bio}</p>}
+                    <div className="flex flex-wrap gap-1.5 mt-3">
+                      {(p.interests ?? []).slice(0, 3).map((i) => (
+                        <span key={i} className="text-[11px] px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground">{i}</span>
+                      ))}
+                    </div>
+                    <div className="mt-auto pt-4">
+                      {status === 'none' && (
+                        <Button onClick={() => sendRequest(p.id)} disabled={busy} className="w-full bg-gradient-brand text-primary-foreground gap-1.5">
+                          {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <><UserPlus className="h-4 w-4" /> Connect</>}
+                        </Button>
+                      )}
+                      {status === 'pending-out' && (
+                        <Button disabled variant="secondary" className="w-full gap-1.5"><Clock className="h-4 w-4" /> Pending</Button>
+                      )}
+                      {status === 'pending-in' && (
+                        <Button asChild variant="secondary" className="w-full gap-1.5">
+                          <Link to="/dashboard/friends"><Users className="h-4 w-4" /> Respond</Link>
+                        </Button>
+                      )}
+                      {status === 'friends' && (
+                        <Button asChild variant="secondary" className="w-full gap-1.5">
+                          <Link to={`/dashboard/chat/${p.id}`}><Check className="h-4 w-4" /> Message</Link>
+                        </Button>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+
+          {filtered.length === 0 && <EmptyState />}
+
+          {filteredDemos.length > 0 && (
+            <section className="mt-10">
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="h-4 w-4 text-primary" />
+                <h2 className="text-lg font-display font-semibold">Sample profiles</h2>
+                <span className="text-xs text-muted-foreground">— a peek at the kind of matches you'll find on GoMilap</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                {filteredDemos.map((d) => (
+                  <DemoCard key={d.id} d={d} />
+                ))}
+              </div>
+            </section>
+          )}
+        </>
       )}
     </div>
+  );
+}
+
+function DemoCard({ d }: { d: DemoProfile }) {
+  const handleConnect = () => {
+    toast.info('This is a sample profile — connect with real GoMilap members from Discover.');
+  };
+  return (
+    <article
+      onClick={handleConnect}
+      className="glass rounded-2xl p-4 flex flex-col animate-fade-in cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_10px_40px_-10px_hsl(var(--primary)/0.45)] hover:border-primary/40"
+    >
+      <div className="relative">
+        <img
+          src={d.avatar_url}
+          alt={`${d.full_name} profile photo`}
+          loading="lazy"
+          width={512}
+          height={512}
+          className="w-full aspect-square object-cover rounded-xl"
+        />
+        <span className="absolute top-2 left-2 text-[10px] font-medium px-2 py-0.5 rounded-full bg-background/80 backdrop-blur border border-border/60">
+          Sample
+        </span>
+      </div>
+      <div className="mt-3">
+        <p className="font-semibold truncate">
+          {d.full_name}, <span className="text-muted-foreground font-normal">{d.age}</span>
+        </p>
+        <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+          <MapPin className="h-3 w-3" /> {d.location}
+        </p>
+      </div>
+      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{d.bio}</p>
+      <div className="flex flex-wrap gap-1.5 mt-3">
+        {d.interests.map((i) => (
+          <span key={i} className="text-[11px] px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground">{i}</span>
+        ))}
+      </div>
+      <div className="mt-auto pt-4">
+        <Button
+          onClick={(e) => { e.stopPropagation(); handleConnect(); }}
+          className="w-full bg-gradient-brand text-primary-foreground gap-1.5"
+        >
+          <UserPlus className="h-4 w-4" /> Connect
+        </Button>
+      </div>
+    </article>
   );
 }
 
