@@ -635,8 +635,10 @@ export default function Compliance() {
           </div>
 
           <p className="text-xs text-muted-foreground mt-12 text-center">
-            This Compliance Statement should be read in conjunction with our Terms of Service, Community Guidelines, and
-            Privacy Policy. © {new Date().getFullYear()} GoMilap.
+            This Compliance Statement should be read in conjunction with our Terms of Service, Community Guidelines, and Privacy Policy.
+          </p>
+          <p className="text-xs text-muted-foreground mt-4 text-center">
+            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
           </p>
         </article>
       </section>
