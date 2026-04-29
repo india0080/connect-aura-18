@@ -127,10 +127,9 @@ export default function Discover() {
             <Skeleton key={i} className="h-72 rounded-2xl" />
           ))}
         </div>
-      ) : filtered.length === 0 ? (
-        <EmptyState />
       ) : (
         <>
+
           {filtered.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
               {filtered.map(({ p, shared }) => {
@@ -182,14 +181,18 @@ export default function Discover() {
             </div>
           )}
 
-          {filtered.length === 0 && <EmptyState />}
+          {filtered.length === 0 && filteredDemos.length === 0 && <EmptyState />}
 
           {filteredDemos.length > 0 && (
-            <section className="mt-10">
+            <section className={filtered.length > 0 ? 'mt-10' : 'mt-6'}>
               <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="h-4 w-4 text-primary" />
-                <h2 className="text-lg font-display font-semibold">Sample profiles</h2>
-                <span className="text-xs text-muted-foreground">— a peek at the kind of matches you'll find on GoMilap</span>
+                <h2 className="text-lg font-display font-semibold">
+                  {filtered.length > 0 ? 'Sample profiles' : 'Suggested for you'}
+                </h2>
+                <span className="text-xs text-muted-foreground hidden sm:inline">
+                  — a peek at the kind of matches you'll find on GoMilap
+                </span>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {filteredDemos.map((d) => (
