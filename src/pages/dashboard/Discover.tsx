@@ -127,10 +127,9 @@ export default function Discover() {
             <Skeleton key={i} className="h-72 rounded-2xl" />
           ))}
         </div>
-      ) : filtered.length === 0 ? (
-        <EmptyState />
       ) : (
         <>
+
           {filtered.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
               {filtered.map(({ p, shared }) => {
