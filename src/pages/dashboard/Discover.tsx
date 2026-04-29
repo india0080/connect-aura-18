@@ -69,15 +69,12 @@ export default function Discover() {
   }, [profiles, profile, search, interestFilter]);
 
   const filteredDemos = useMemo(() => {
-    const pref = profile?.preference;
     return DEMO_PROFILES.filter((d) => {
-      if (pref === 'men' && d.gender !== 'male') return false;
-      if (pref === 'women' && d.gender !== 'female') return false;
       if (search && !d.full_name.toLowerCase().includes(search.toLowerCase())) return false;
       if (interestFilter && !d.interests.includes(interestFilter)) return false;
       return true;
     });
-  }, [profile, search, interestFilter]);
+  }, [search, interestFilter]);
 
   const sendRequest = async (otherId: string) => {
     if (!user) return;
