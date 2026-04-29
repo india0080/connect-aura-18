@@ -153,7 +153,7 @@ export default function Compliance() {
           <H3>2.4 How to Submit a Report</H3>
           <UL>
             <li><strong>Online portal:</strong> Available 24/7, secure and encrypted, multiple language support</li>
-            <li><strong>Email:</strong> <a href="mailto:whistleblower@gomilap.com" className="text-primary hover:underline">whistleblower@gomilap.com</a> (mark as confidential)</li>
+            <li><strong>Email:</strong> <a href="mailto:grievance@gomilap.com" className="text-primary hover:underline">grievance@gomilap.com</a> (mark as confidential)</li>
             <li><strong>Postal address:</strong> GoMilap Compliance Team, marked "Confidential — Compliance Department Only"</li>
             <li><strong>In-person:</strong> Scheduled meeting with the Compliance Officer</li>
           </UL>
@@ -336,7 +336,7 @@ export default function Compliance() {
           </UL>
 
           <H3>5.6 Data Protection Officer (DPO)</H3>
-          <P>Contact the DPO at <a href="mailto:dpo@gomilap.com" className="text-primary hover:underline">dpo@gomilap.com</a>. The DPO monitors GDPR compliance, advises on obligations, cooperates with supervisory authorities, and serves as the point of contact for data subjects.</P>
+          <P>Contact us at <a href="mailto:grievance@gomilap.com" className="text-primary hover:underline">grievance@gomilap.com</a> for GDPR matters. Our team monitors GDPR compliance, advises on obligations, cooperates with supervisory authorities, and serves as the point of contact for data subjects.</P>
 
           <H3>5.7 Data Protection Impact Assessment (DPIA)</H3>
           <UL>
@@ -589,14 +589,8 @@ export default function Compliance() {
           <H2 id="contact">10. Contact Information</H2>
           <div className="grid sm:grid-cols-2 gap-4 my-4">
             {[
-              { label: 'General Compliance', email: 'compliance@gomilap.com' },
-              { label: 'Whistleblower', email: 'whistleblower@gomilap.com' },
-              { label: 'Privacy', email: 'privacy@gomilap.com' },
-              { label: 'Data Protection Officer', email: 'dpo@gomilap.com' },
-              { label: 'Grievance Redressal', email: 'grievance@gomilap.com' },
-              { label: 'Legal Inquiries', email: 'legal@gomilap.com' },
-              { label: 'Law Enforcement', email: 'lawenforcement@gomilap.com' },
               { label: 'Support', email: 'support@gomilap.com' },
+              { label: 'Grievance Redressal', email: 'grievance@gomilap.com' },
             ].map((c) => (
               <div key={c.email} className="glass rounded-2xl p-4">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">{c.label}</p>
