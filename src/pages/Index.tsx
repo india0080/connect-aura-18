@@ -192,17 +192,16 @@ export default function Index() {
 
       {/* FOOTER */}
       <footer className="px-6 py-16 border-t border-border/60">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-10 text-sm">
+        <div className="max-w-6xl mx-auto grid gap-10 text-sm md:grid-cols-[1.2fr_1fr_1fr]">
           <div className="space-y-5">
             <Logo />
+            <p className="text-muted-foreground max-w-xs">
+              Safe Platform · Real People · Trusted Connections
+            </p>
             <div className="flex items-center gap-4 text-muted-foreground">
               <a href="#" aria-label="Facebook" className="hover:text-primary transition-colors"><Facebook className="h-5 w-5" /></a>
               <a href="#" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram className="h-5 w-5" /></a>
             </div>
-          </div>
-
-          <div className="space-y-3">
-            <a href="#" className="block text-primary hover:opacity-80">Support</a>
           </div>
 
           <div className="space-y-3">
