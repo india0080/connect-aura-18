@@ -215,7 +215,7 @@ export default function Terms() {
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
               <span className="text-muted-foreground">Version</span>{' '}
-              <strong className="text-foreground">2.0</strong>
+              <strong className="text-foreground">1.0</strong>
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60 inline-flex items-center gap-1.5">
               <Globe2 className="h-3.5 w-3.5 text-primary" />
@@ -888,7 +888,7 @@ export default function Terms() {
                 Safe Connections. Meaningful Relationships.
               </p>
               <p className="text-sm text-muted-foreground">
-                Terms &amp; Conditions v2.0 — Last updated April 28, 2026
+                Terms &amp; Conditions v1.0 — Last updated April 28, 2026
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <Button asChild variant="outline" size="sm" className="rounded-full">

@@ -187,7 +187,7 @@ export default function Privacy() {
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
               <span className="text-muted-foreground">Version</span>{' '}
-              <strong className="text-foreground">2.0 — Simplified</strong>
+              <strong className="text-foreground">1.0</strong>
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60 inline-flex items-center gap-1.5">
               <Globe2 className="h-3.5 w-3.5 text-primary" />
