@@ -698,7 +698,7 @@ export default function Terms() {
               ['Email', <a key="g1" href="mailto:grievance@gomilap.com" className="text-primary hover:underline">grievance@gomilap.com</a>],
               ['Response Time', 'Within 24 hours'],
               ['Resolution Time', 'Within 15 days'],
-              ['Physical Address', 'Bajaj Dwar, Rudrapur - 263153, India'],
+              ['Physical Address', 'Bajaj Dwar, Rudrapur – 263153, Uttarakhand, India'],
             ]}
           />
 
@@ -822,10 +822,10 @@ export default function Terms() {
                 <Building2 className="h-5 w-5 text-primary" />
               </div>
               <div className="text-sm leading-relaxed">
-                <p className="font-display font-semibold text-base">GoMilap Technologies Private Limited</p>
+                <p className="font-display font-semibold text-base">GoMilap</p>
                 <p className="text-muted-foreground">
                   Bajaj Dwar,<br />
-                  Rudrapur - 263153<br />
+                  Rudrapur – 263153<br />
                   Uttarakhand, India
                 </p>
               </div>

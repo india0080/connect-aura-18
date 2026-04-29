@@ -789,7 +789,7 @@ export default function Privacy() {
             <CardContent className="p-5 flex items-start gap-3">
               <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
               <address className="not-italic text-sm leading-relaxed">
-                <strong className="text-foreground">GoMilap Technologies Private Limited</strong>
+                <strong className="text-foreground">GoMilap</strong>
                 <br />
                 Bajaj Dwar,
                 <br />
