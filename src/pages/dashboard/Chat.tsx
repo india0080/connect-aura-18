@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { DEMO_PROFILES } from '@/lib/demoProfiles';
 import type { FriendRequest, Message, Profile } from '@/types';
 
 const EMOJIS = ['😀','😂','😍','🥰','😎','🤔','😢','😡','👍','🙏','🔥','✨','❤️','🎉','💯','😅'];
