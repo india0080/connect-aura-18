@@ -32,6 +32,7 @@ import Terms from "./pages/Terms";
 import About from "./pages/About";
 import HealthDataPrivacy from "./pages/HealthDataPrivacy";
 import OpenSourceLicenses from "./pages/OpenSourceLicenses";
+import RefundPolicy from "./pages/RefundPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/health-data-privacy" element={<HealthDataPrivacy />} />
             <Route path="/open-source-licenses" element={<OpenSourceLicenses />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
             <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />

@@ -222,6 +222,7 @@ export default function Index() {
             <Link to="/open-source-licenses" className="block text-primary hover:opacity-80">Open Source Licenses</Link>
             <Link to="/privacy" className="block text-primary hover:opacity-80">Privacy Policy</Link>
             <Link to="/terms" className="block text-primary hover:opacity-80">Terms and Conditions</Link>
+            <Link to="/refund-policy" className="block text-primary hover:opacity-80">Refund Policy</Link>
           </div>
         </div>
         <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-border/40 text-xs text-muted-foreground text-center">
