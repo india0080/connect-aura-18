@@ -13,12 +13,16 @@ export const SplashScreen = () => {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    // Lock scroll while splash is showing
+    // Lock scroll only while splash is visible
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const fadeTimer = window.setTimeout(() => setFading(true), 1400);
-    const hideTimer = window.setTimeout(() => setVisible(false), 1900);
+    const hideTimer = window.setTimeout(() => {
+      setVisible(false);
+      // Restore scroll the moment splash hides
+      document.body.style.overflow = prevOverflow;
+    }, 1900);
 
     return () => {
       window.clearTimeout(fadeTimer);
@@ -26,6 +30,7 @@ export const SplashScreen = () => {
       document.body.style.overflow = prevOverflow;
     };
   }, []);
+
 
   if (!visible) return null;
 
