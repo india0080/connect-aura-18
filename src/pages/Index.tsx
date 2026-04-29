@@ -137,8 +137,6 @@ export default function Index() {
           </div>
 
           <div className="space-y-3">
-            <a href="#" className="block text-primary hover:opacity-80">Press</a>
-            <a href="#" className="block text-primary hover:opacity-80">Careers</a>
             <a href="#" className="block text-primary hover:opacity-80">Support</a>
           </div>
 
