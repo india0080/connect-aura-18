@@ -29,6 +29,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import About from "./pages/About";
 import HealthDataPrivacy from "./pages/HealthDataPrivacy";
+import OpenSourceLicenses from "./pages/OpenSourceLicenses";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
