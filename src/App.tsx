@@ -26,6 +26,7 @@ import SafetyCode from "./pages/SafetyCode";
 import SafetyCenter from "./pages/SafetyCenter";
 import Compliance from "./pages/Compliance";
 import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ const App = () => (
             <Route path="/safety-center" element={<SafetyCenter />} />
             <Route path="/compliance" element={<Compliance />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />

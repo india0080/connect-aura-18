@@ -154,7 +154,7 @@ export default function Index() {
             <Link to="/safety-center" className="block text-primary hover:opacity-80">Safety Center</Link>
             <a href="#" className="block text-primary hover:opacity-80">Open Source Licenses</a>
             <Link to="/privacy" className="block text-primary hover:opacity-80">Privacy Policy</Link>
-            <a href="#" className="block text-primary hover:opacity-80">Terms and Conditions</a>
+            <Link to="/terms" className="block text-primary hover:opacity-80">Terms and Conditions</Link>
           </div>
         </div>
         <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-border/40 text-xs text-muted-foreground text-center">
