@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { VerificationStatus } from '@/components/profile/VerificationStatus';
 import type { Gender, Preference } from '@/types';
 
 export default function ProfilePage() {
@@ -170,6 +171,8 @@ export default function ProfilePage() {
           </Button>
         </div>
       </div>
+
+      {user && <VerificationStatus user={user} profile={profile} />}
 
       <div className="glass rounded-2xl p-6 mt-6 border border-destructive/30">
         <h3 className="font-semibold text-destructive flex items-center gap-2"><Trash2 className="h-4 w-4" /> Danger zone</h3>

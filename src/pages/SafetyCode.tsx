@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ShieldCheck, Mail, AlertTriangle, Heart, CheckCircle2, Bot, Users, Megaphone, Siren, Ban, Scale, Globe, FileText, Sparkles } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Mail, AlertTriangle, Heart, CheckCircle2, Bot, Users, Megaphone, Siren, Ban, Scale, Globe, FileText, Sparkles, Download } from 'lucide-react';
 import { Logo } from '@/components/common/Logo';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Button } from '@/components/ui/button';
@@ -74,6 +74,11 @@ export default function SafetyCode() {
               <Link to="/safety-center">Visit Safety Center</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="rounded-full">
+              <a href="/gomilap-online-safety-code.pdf" download>
+                <Download className="h-4 w-4 mr-2" />Download PDF
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="ghost" className="rounded-full">
               <a href="mailto:support@gomilap.com">Contact support</a>
             </Button>
           </div>
