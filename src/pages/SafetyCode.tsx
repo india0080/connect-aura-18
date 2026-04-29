@@ -69,6 +69,14 @@ export default function SafetyCode() {
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
             A safety-first approach combining AI technology, user controls, and legal compliance to protect our community.
           </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Button asChild size="lg" className="bg-gradient-brand text-primary-foreground rounded-full shadow-glow">
+              <Link to="/safety-center">Visit Safety Center</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full">
+              <a href="mailto:support@gomilap.com">Contact support</a>
+            </Button>
+          </div>
         </div>
       </section>
 
