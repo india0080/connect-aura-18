@@ -64,7 +64,7 @@ export default function Compliance() {
         <p className="text-muted-foreground mt-5 max-w-2xl mx-auto">
           Our commitment to legal compliance, ethical business practices, user protection, and transparency.
         </p>
-        <p className="text-xs text-muted-foreground mt-4">Version 1.0 · June 2025</p>
+        <p className="text-xs text-muted-foreground mt-4">Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.</p>
       </section>
 
       {/* Body */}
@@ -635,8 +635,10 @@ export default function Compliance() {
           </div>
 
           <p className="text-xs text-muted-foreground mt-12 text-center">
-            This Compliance Statement should be read in conjunction with our Terms of Service, Community Guidelines, and
-            Privacy Policy. © {new Date().getFullYear()} GoMilap.
+            This Compliance Statement should be read in conjunction with our Terms of Service, Community Guidelines, and Privacy Policy.
+          </p>
+          <p className="text-xs text-muted-foreground mt-4 text-center">
+            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
           </p>
         </article>
       </section>

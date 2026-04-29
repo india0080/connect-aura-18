@@ -451,6 +451,10 @@ export default function About() {
               Safe Platform · Real People · Trusted Connections
             </p>
           </div>
+
+          <p className="text-xs text-muted-foreground mt-12 text-center">
+            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
+          </p>
         </div>
       </section>
     </div>

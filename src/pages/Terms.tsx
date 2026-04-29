@@ -210,8 +210,8 @@ export default function Terms() {
           {/* Meta chips */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5 text-sm">
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
-              <span className="text-muted-foreground">Updated</span>{' '}
-              <strong className="text-foreground">April 28, 2026</strong>
+              <span className="text-muted-foreground">Last Updated</span>{' '}
+              <strong className="text-foreground">June 2025</strong>
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
               <span className="text-muted-foreground">Version</span>{' '}
@@ -909,6 +909,10 @@ export default function Terms() {
               </div>
             </CardContent>
           </Card>
+
+          <p className="text-xs text-muted-foreground mt-10 text-center">
+            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
+          </p>
         </article>
       </div>
     </div>

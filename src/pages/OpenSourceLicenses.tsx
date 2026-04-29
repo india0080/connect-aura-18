@@ -135,6 +135,10 @@ export default function OpenSourceLicenses() {
             </p>
           </CardContent>
         </Card>
+
+        <p className="text-xs text-muted-foreground mt-10 text-center">
+          Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
+        </p>
       </div>
     </div>
   );
