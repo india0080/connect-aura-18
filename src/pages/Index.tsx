@@ -125,6 +125,74 @@ export default function Index() {
         </div>
       </section>
 
+      {/* DOWNLOAD */}
+      <section className="relative px-6 py-24 overflow-hidden">
+        {/* Backdrop: dark gradient with brand wash */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(270_60%_12%)] via-[hsl(280_50%_8%)] to-black" />
+        <div className="absolute inset-0 bg-gradient-brand-soft opacity-30" />
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[420px] w-[820px] bg-gradient-brand opacity-30 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="relative max-w-5xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 backdrop-blur-md">
+            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-xs uppercase tracking-widest text-white/80">Now available</span>
+          </div>
+          <h2 className="mt-5 font-display font-bold text-4xl md:text-6xl text-white leading-tight">
+            Download <span className="text-gradient-brand">GoMilap</span> Now
+          </h2>
+          <p className="mt-4 text-lg text-white/70 max-w-xl mx-auto">
+            Available on App Store and Google Play. Real connections, anywhere you go.
+          </p>
+
+          {/* Store badges */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* App Store */}
+            <a
+              href="#"
+              aria-label="Download on the App Store"
+              className="group relative inline-flex items-center gap-3 rounded-2xl bg-black border border-white/15 px-6 py-3.5 min-w-[210px] shadow-2xl transition-all duration-300 hover:scale-[1.04] hover:border-primary/60 hover:shadow-glow"
+            >
+              <span className="absolute inset-0 rounded-2xl bg-gradient-brand opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-md" />
+              <svg viewBox="0 0 24 24" className="relative h-8 w-8 fill-white" aria-hidden="true">
+                <path d="M17.05 12.04c-.02-2.18 1.78-3.23 1.86-3.28-1.01-1.48-2.59-1.69-3.15-1.71-1.34-.14-2.62.79-3.31.79-.69 0-1.74-.77-2.86-.75-1.47.02-2.83.85-3.59 2.17-1.53 2.65-.39 6.57 1.1 8.72.73 1.05 1.6 2.23 2.74 2.19 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.83-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.32-3.51zM14.94 5.49c.6-.74 1.01-1.75.9-2.76-.87.04-1.95.59-2.57 1.31-.55.64-1.04 1.69-.91 2.68.97.07 1.97-.49 2.58-1.23z"/>
+              </svg>
+              <div className="relative text-left leading-tight">
+                <p className="text-[10px] uppercase tracking-wider text-white/70">Download on the</p>
+                <p className="text-lg font-semibold text-white -mt-0.5">App Store</p>
+              </div>
+            </a>
+
+            {/* Google Play */}
+            <a
+              href="#"
+              aria-label="Get it on Google Play"
+              className="group relative inline-flex items-center gap-3 rounded-2xl bg-black border border-white/15 px-6 py-3.5 min-w-[210px] shadow-2xl transition-all duration-300 hover:scale-[1.04] hover:border-primary/60 hover:shadow-glow"
+            >
+              <span className="absolute inset-0 rounded-2xl bg-gradient-brand opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-md" />
+              <svg viewBox="0 0 24 24" className="relative h-8 w-8" aria-hidden="true">
+                <path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1L13 12.1v-.2L3.7 2.3h-.1z" fill="#00C4FF"/>
+                <path d="M16.3 15.2 13 12.1v-.2L16.3 8.8l.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1-.4z" fill="#FFD400"/>
+                <path d="M16.4 15.1 13 12 3.6 21.7c.4.4 1 .4 1.7.1l11.1-6.7" fill="#FF3A44"/>
+                <path d="M16.4 8.9 5.3 2.2c-.7-.4-1.3-.3-1.7.1L13 12l3.4-3.1z" fill="#00E676"/>
+              </svg>
+              <div className="relative text-left leading-tight">
+                <p className="text-[10px] uppercase tracking-wider text-white/70">Get it on</p>
+                <p className="text-lg font-semibold text-white -mt-0.5">Google Play</p>
+              </div>
+            </a>
+          </div>
+
+          {/* Mini trust row */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/60">
+            <span className="flex items-center gap-2"><span className="text-yellow-400">★★★★★</span> Loved by users</span>
+            <span className="hidden sm:inline">·</span>
+            <span>Free to download</span>
+            <span className="hidden sm:inline">·</span>
+            <span>India · Global</span>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="px-6 py-16 border-t border-border/60">
         <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-10 text-sm">
