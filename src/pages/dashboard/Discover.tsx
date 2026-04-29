@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Search, Loader2, Check, Clock, UserPlus, Users } from 'lucide-react';
+import { Search, Loader2, Check, Clock, UserPlus, Users, MapPin, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 
