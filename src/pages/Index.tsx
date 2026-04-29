@@ -145,7 +145,7 @@ export default function Index() {
           <div className="space-y-3">
             <Link to="/safety" className="block text-primary hover:opacity-80">Safety Policy &amp; Community Guidelines</Link>
             <Link to="/compliance" className="block text-primary hover:opacity-80">Compliance</Link>
-            <a href="#" className="block text-primary hover:opacity-80">Consumer Health Data Privacy</a>
+            <Link to="/health-data-privacy" className="block text-primary hover:opacity-80">Consumer Health Data Privacy</Link>
             <Link to="/about" className="block text-primary hover:opacity-80">About Us</Link>
           </div>
 
