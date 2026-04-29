@@ -34,11 +34,8 @@ export default function Index() {
           {/* Top nav */}
           <header className="relative z-10 px-6 py-5 flex items-center justify-between max-w-7xl mx-auto w-full">
             <Logo />
-            <nav className="hidden md:flex items-center gap-1 glass rounded-full px-2 py-1.5">
-              <Link to="/premium" className="px-4 py-1.5 text-sm rounded-full hover:bg-white/5 transition-colors">Premium</Link>
-              <Link to="/premium" className="px-4 py-1.5 text-sm rounded-full hover:bg-white/5 transition-colors">Business</Link>
-              <Link to="/login" className="px-4 py-1.5 text-sm rounded-full hover:bg-white/5 transition-colors">Support</Link>
-            </nav>
+            <nav className="hidden md:flex items-center gap-1 glass rounded-full px-2 py-1.5" />
+
             <div className="flex gap-2">
               {user ? (
                 <Button asChild className="bg-gradient-brand text-primary-foreground">
