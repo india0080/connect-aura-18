@@ -37,6 +37,7 @@ export default function Onboarding() {
   const [location, setLocation] = useState<string>('');
   const [detectingLocation, setDetectingLocation] = useState(false);
   const [relationshipStatus, setRelationshipStatus] = useState<string>('');
+  const [pendingLocation, setPendingLocation] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
   if (loading) return <FullScreenLoader />;
