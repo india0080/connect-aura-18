@@ -114,7 +114,12 @@ export default function Onboarding() {
         avatar_url = data.publicUrl;
       }
       const { error } = await supabase.from('profiles').update({
-        gender, preference, bio: bio.trim(), interests, avatar_url, onboarding_complete: true,
+        gender, preference, bio: bio.trim(), interests, avatar_url,
+        religion: religion || null,
+        languages,
+        location: location.trim() || null,
+        relationship_status: relationshipStatus || null,
+        onboarding_complete: true,
       }).eq('id', user.id);
       if (error) throw error;
       await refreshProfile();
