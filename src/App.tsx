@@ -33,6 +33,8 @@ import About from "./pages/About";
 import HealthDataPrivacy from "./pages/HealthDataPrivacy";
 import OpenSourceLicenses from "./pages/OpenSourceLicenses";
 import RefundPolicy from "./pages/RefundPolicy";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -76,6 +78,8 @@ const App = () => (
             <Route path="/health-data-privacy" element={<HealthDataPrivacy />} />
             <Route path="/open-source-licenses" element={<OpenSourceLicenses />} />
             <Route path="/refund-policy" element={<RefundPolicy />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />

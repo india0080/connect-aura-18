@@ -27,6 +27,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useAuth } from '@/hooks/useAuth';
+import { BLOG_POSTS } from '@/lib/blogPosts';
 import heroImg from '@/assets/hero-friends.jpg';
 import showcaseImg from '@/assets/app-showcase.jpg';
 
@@ -403,6 +404,40 @@ export default function Index() {
         </div>
       </section>
 
+      {/* FROM THE BLOG */}
+      <section id="blog" className="px-6 py-20 md:py-28">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
+            <div>
+              <p className="text-primary text-sm font-semibold uppercase tracking-widest">From the blog</p>
+              <h2 className="mt-2 font-display font-bold text-3xl md:text-4xl leading-tight">
+                Guides to <span className="text-gradient-brand">earn online in India</span>
+              </h2>
+            </div>
+            <Button asChild variant="secondary" className="rounded-full">
+              <Link to="/blog">View all posts</Link>
+            </Button>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {BLOG_POSTS.slice(0, 3).map((p) => (
+              <article
+                key={p.slug}
+                className="group rounded-2xl border border-border/60 bg-card p-6 hover:border-primary/50 hover:shadow-glow transition-all"
+              >
+                <span className="text-xs font-semibold text-primary uppercase tracking-wider">{p.category}</span>
+                <h3 className="mt-3 font-display font-bold text-lg leading-snug">
+                  <Link to={`/blog/${p.slug}`} className="hover:text-gradient-brand">{p.title}</Link>
+                </h3>
+                <p className="mt-3 text-sm text-muted-foreground line-clamp-3">{p.excerpt}</p>
+                <Link to={`/blog/${p.slug}`} className="mt-4 inline-block text-sm text-primary font-semibold hover:underline">
+                  Read more →
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* DOWNLOAD / CTA */}
       <section className="relative px-6 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[hsl(270_60%_12%)] via-[hsl(280_50%_8%)] to-black" />
@@ -496,6 +531,7 @@ export default function Index() {
             <Link to="/about" className="block text-muted-foreground hover:text-primary">About Us</Link>
             <a href="mailto:support@gomilap.com" className="block text-muted-foreground hover:text-primary">Contact</a>
             <a href="#earn" className="block text-muted-foreground hover:text-primary">Become a Host</a>
+            <Link to="/blog" className="block text-muted-foreground hover:text-primary">Blog</Link>
             <a href="mailto:agency@gomilap.com" className="block text-muted-foreground hover:text-primary">Agency Program</a>
           </div>
 
