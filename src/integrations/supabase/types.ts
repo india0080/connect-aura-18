@@ -81,8 +81,12 @@ export type Database = {
           gender: Database["public"]["Enums"]["gender_type"] | null
           id: string
           interests: string[]
+          languages: string[]
+          location: string | null
           onboarding_complete: boolean
           preference: Database["public"]["Enums"]["preference_type"] | null
+          relationship_status: string | null
+          religion: string | null
           updated_at: string
         }
         Insert: {
@@ -94,8 +98,12 @@ export type Database = {
           gender?: Database["public"]["Enums"]["gender_type"] | null
           id: string
           interests?: string[]
+          languages?: string[]
+          location?: string | null
           onboarding_complete?: boolean
           preference?: Database["public"]["Enums"]["preference_type"] | null
+          relationship_status?: string | null
+          religion?: string | null
           updated_at?: string
         }
         Update: {
@@ -107,8 +115,12 @@ export type Database = {
           gender?: Database["public"]["Enums"]["gender_type"] | null
           id?: string
           interests?: string[]
+          languages?: string[]
+          location?: string | null
           onboarding_complete?: boolean
           preference?: Database["public"]["Enums"]["preference_type"] | null
+          relationship_status?: string | null
+          religion?: string | null
           updated_at?: string
         }
         Relationships: []

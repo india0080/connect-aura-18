@@ -1,16 +1,18 @@
 import { useState, useRef } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Camera, Loader2, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Camera, Loader2, MapPin, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
-import { GENDERS, INTERESTS, PREFERENCES } from '@/lib/constants';
+import { GENDERS, INTERESTS, PREFERENCES, RELIGIONS, LANGUAGES, RELATIONSHIP_STATUSES } from '@/lib/constants';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Logo } from '@/components/common/Logo';
 import { FullScreenLoader } from '@/components/common/FullScreenLoader';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { Gender, Preference } from '@/types';
 
@@ -26,6 +28,11 @@ export default function Onboarding() {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [bio, setBio] = useState('');
   const [interests, setInterests] = useState<string[]>([]);
+  const [religion, setReligion] = useState<string>('');
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [location, setLocation] = useState<string>('');
+  const [detectingLocation, setDetectingLocation] = useState(false);
+  const [relationshipStatus, setRelationshipStatus] = useState<string>('');
   const [saving, setSaving] = useState(false);
 
   if (loading) return <FullScreenLoader />;
@@ -44,6 +51,45 @@ export default function Onboarding() {
 
   const toggleInterest = (i: string) => {
     setInterests((prev) => prev.includes(i) ? prev.filter((x) => x !== i) : prev.length < 12 ? [...prev, i] : prev);
+  };
+
+  const toggleLanguage = (l: string) => {
+    setLanguages((prev) => prev.includes(l) ? prev.filter((x) => x !== l) : [...prev, l]);
+  };
+
+  const detectLocation = () => {
+    if (!('geolocation' in navigator)) {
+      toast.error('Geolocation not supported on this device');
+      return;
+    }
+    setDetectingLocation(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords;
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`,
+            { headers: { Accept: 'application/json' } },
+          );
+          const data = await res.json();
+          const addr = data?.address ?? {};
+          const city = addr.city || addr.town || addr.village || addr.county || '';
+          const country = addr.country || '';
+          const formatted = [city, country].filter(Boolean).join(', ');
+          if (formatted) setLocation(formatted);
+          else toast.error('Could not determine your city');
+        } catch {
+          toast.error('Could not detect your location');
+        } finally {
+          setDetectingLocation(false);
+        }
+      },
+      () => {
+        toast.error('Location permission denied');
+        setDetectingLocation(false);
+      },
+      { enableHighAccuracy: false, timeout: 10000 },
+    );
   };
 
   const next = () => {
@@ -68,7 +114,12 @@ export default function Onboarding() {
         avatar_url = data.publicUrl;
       }
       const { error } = await supabase.from('profiles').update({
-        gender, preference, bio: bio.trim(), interests, avatar_url, onboarding_complete: true,
+        gender, preference, bio: bio.trim(), interests, avatar_url,
+        religion: religion || null,
+        languages,
+        location: location.trim() || null,
+        relationship_status: relationshipStatus || null,
+        onboarding_complete: true,
       }).eq('id', user.id);
       if (error) throw error;
       await refreshProfile();
@@ -199,6 +250,70 @@ export default function Onboarding() {
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Religion */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Religion <span className="text-muted-foreground/70 normal-case">(optional)</span></p>
+                <Select value={religion} onValueChange={setReligion}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your religion" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {RELIGIONS.map((r) => (
+                      <SelectItem key={r} value={r}>{r}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Languages */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">
+                  Language 🌐 <span className="text-muted-foreground/70 normal-case">(optional, multi-select)</span>
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {LANGUAGES.map((l) => {
+                    const active = languages.includes(l);
+                    return (
+                      <button key={l} type="button" onClick={() => toggleLanguage(l)}
+                        className={`px-3.5 py-1.5 rounded-full text-sm font-medium border transition-all ${active ? 'bg-gradient-brand text-primary-foreground border-transparent shadow-glow' : 'border-border hover:border-primary/50'}`}>
+                        {l}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Location 📍 <span className="text-muted-foreground/70 normal-case">(optional)</span></p>
+                <div className="flex gap-2">
+                  <Input
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="e.g. Delhi, India"
+                  />
+                  <Button type="button" variant="secondary" onClick={detectLocation} disabled={detectingLocation} className="gap-1 shrink-0">
+                    {detectingLocation ? <Loader2 className="h-4 w-4 animate-spin" /> : <MapPin className="h-4 w-4" />}
+                    <span className="hidden sm:inline">Detect</span>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Relationship Status */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Relationship Status 💑 <span className="text-muted-foreground/70 normal-case">(optional)</span></p>
+                <Select value={relationshipStatus} onValueChange={setRelationshipStatus}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {RELATIONSHIP_STATUSES.map((s) => (
+                      <SelectItem key={s} value={s}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           )}
