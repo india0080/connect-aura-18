@@ -44,8 +44,11 @@ export default function Signup() {
         },
       });
       if (error) throw error;
-      toast.success('Welcome to GoMilap!');
-      navigate('/onboarding', { replace: true });
+      // Do not auto-login. Force sign-out in case a session was created,
+      // then send the user to login with a success message.
+      await supabase.auth.signOut();
+      toast.success('Verification link sent to your email. Please verify, then log in.');
+      navigate('/login', { replace: true });
     } catch (e) {
       const msg = e instanceof Error ? e.message : 'Sign up failed';
       toast.error(msg);
