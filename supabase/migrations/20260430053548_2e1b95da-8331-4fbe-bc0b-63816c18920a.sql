@@ -1,0 +1,5 @@
+ALTER TABLE public.profiles
+  ADD COLUMN IF NOT EXISTS religion TEXT,
+  ADD COLUMN IF NOT EXISTS languages TEXT[] NOT NULL DEFAULT '{}'::text[],
+  ADD COLUMN IF NOT EXISTS location TEXT,
+  ADD COLUMN IF NOT EXISTS relationship_status TEXT;
