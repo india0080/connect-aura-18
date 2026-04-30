@@ -27,6 +27,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useAuth } from '@/hooks/useAuth';
+import { BLOG_POSTS } from '@/lib/blogPosts';
 import heroImg from '@/assets/hero-friends.jpg';
 import showcaseImg from '@/assets/app-showcase.jpg';
 
