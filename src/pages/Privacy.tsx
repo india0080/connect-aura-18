@@ -183,7 +183,7 @@ export default function Privacy() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5 text-sm">
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
               <span className="text-muted-foreground">Last Updated</span>{' '}
-              <strong className="text-foreground">June 2025</strong>
+              <strong className="text-foreground">April 2025</strong>
             </span>
             <span className="px-3 py-1.5 rounded-full glass border border-border/60">
               <span className="text-muted-foreground">Version</span>{' '}
@@ -933,7 +933,7 @@ export default function Privacy() {
           </div>
 
           <p className="text-xs text-muted-foreground mt-10 text-center">
-            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
+            Last Updated: April 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
           </p>
         </article>
       </div>

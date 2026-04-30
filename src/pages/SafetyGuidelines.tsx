@@ -111,7 +111,7 @@ export default function SafetyGuidelines() {
         <p className="text-muted-foreground mt-5 max-w-2xl mx-auto">
           Rules and standards that keep GoMilap safe, inclusive, and respectful for everyone.
         </p>
-        <p className="text-xs text-muted-foreground mt-4">Last Updated: June 2025 · Version 1.0</p>
+        <p className="text-xs text-muted-foreground mt-4">Last Updated: April 2025 · Version 1.0</p>
       </section>
 
       {/* Body grid */}
@@ -573,7 +573,7 @@ export default function SafetyGuidelines() {
           </div>
 
           <p className="text-xs text-muted-foreground mt-12 text-center">
-            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
+            Last Updated: April 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
           </p>
         </article>
       </section>
