@@ -1,16 +1,18 @@
 import { useState, useRef } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Camera, Loader2, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Camera, Loader2, MapPin, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
-import { GENDERS, INTERESTS, PREFERENCES } from '@/lib/constants';
+import { GENDERS, INTERESTS, PREFERENCES, RELIGIONS, LANGUAGES, RELATIONSHIP_STATUSES } from '@/lib/constants';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Logo } from '@/components/common/Logo';
 import { FullScreenLoader } from '@/components/common/FullScreenLoader';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { Gender, Preference } from '@/types';
 
