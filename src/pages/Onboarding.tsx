@@ -339,6 +339,28 @@ export default function Onboarding() {
           </div>
         </div>
       </main>
+
+      <AlertDialog open={pendingLocation !== null} onOpenChange={(open) => { if (!open) setPendingLocation(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Use this location?</AlertDialogTitle>
+            <AlertDialogDescription>
+              We detected your location as <span className="font-medium text-foreground">{pendingLocation}</span>. Save it to your profile?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setPendingLocation(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (pendingLocation) setLocation(pendingLocation);
+                setPendingLocation(null);
+              }}
+            >
+              Use this location
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
