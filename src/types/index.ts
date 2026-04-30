@@ -11,6 +11,10 @@ export interface Profile {
   preference: Preference | null;
   bio: string | null;
   interests: string[];
+  religion: string | null;
+  languages: string[];
+  location: string | null;
+  relationship_status: string | null;
   onboarding_complete: boolean;
   created_at: string;
   updated_at: string;
