@@ -28,6 +28,11 @@ export default function Onboarding() {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [bio, setBio] = useState('');
   const [interests, setInterests] = useState<string[]>([]);
+  const [religion, setReligion] = useState<string>('');
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [location, setLocation] = useState<string>('');
+  const [detectingLocation, setDetectingLocation] = useState(false);
+  const [relationshipStatus, setRelationshipStatus] = useState<string>('');
   const [saving, setSaving] = useState(false);
 
   if (loading) return <FullScreenLoader />;
