@@ -13,6 +13,10 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { Gender, Preference } from '@/types';
 
@@ -33,6 +37,7 @@ export default function Onboarding() {
   const [location, setLocation] = useState<string>('');
   const [detectingLocation, setDetectingLocation] = useState(false);
   const [relationshipStatus, setRelationshipStatus] = useState<string>('');
+  const [pendingLocation, setPendingLocation] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
   if (loading) return <FullScreenLoader />;
@@ -76,7 +81,7 @@ export default function Onboarding() {
           const city = addr.city || addr.town || addr.village || addr.county || '';
           const country = addr.country || '';
           const formatted = [city, country].filter(Boolean).join(', ');
-          if (formatted) setLocation(formatted);
+          if (formatted) setPendingLocation(formatted);
           else toast.error('Could not determine your city');
         } catch {
           toast.error('Could not detect your location');
@@ -334,6 +339,28 @@ export default function Onboarding() {
           </div>
         </div>
       </main>
+
+      <AlertDialog open={pendingLocation !== null} onOpenChange={(open) => { if (!open) setPendingLocation(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Use this location?</AlertDialogTitle>
+            <AlertDialogDescription>
+              We detected your location as <span className="font-medium text-foreground">{pendingLocation}</span>. Save it to your profile?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setPendingLocation(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (pendingLocation) setLocation(pendingLocation);
+                setPendingLocation(null);
+              }}
+            >
+              Use this location
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
