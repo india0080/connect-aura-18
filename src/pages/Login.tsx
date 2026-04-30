@@ -7,14 +7,13 @@ import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { supabase } from '@/integrations/supabase/client';
-import { lovable } from '@/integrations/lovable';
 import { loginSchema } from '@/lib/validation';
 import { AuthLayout } from '@/components/common/AuthLayout';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
+
 import { Checkbox } from '@/components/ui/checkbox';
 
 type Form = z.infer<typeof loginSchema>;
@@ -23,7 +22,6 @@ export default function Login() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [oauthLoading, setOauthLoading] = useState(false);
   const [magicLoading, setMagicLoading] = useState(false);
 
   const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<Form>({
@@ -43,14 +41,6 @@ export default function Login() {
     } finally {
       setSubmitting(false);
     }
-  };
-
-  const onGoogle = async () => {
-    setOauthLoading(true);
-    const result = await lovable.auth.signInWithOAuth('google', { redirect_uri: window.location.origin });
-    if (result.error) { toast.error('Google sign-in failed'); setOauthLoading(false); return; }
-    if (result.redirected) return;
-    navigate('/dashboard', { replace: true });
   };
 
   const onMagic = async () => {
@@ -79,18 +69,7 @@ export default function Login() {
       <h1 className="text-xl sm:text-2xl font-display font-bold">Welcome back</h1>
       <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Sign in to continue your conversations.</p>
 
-      <Button onClick={onGoogle} disabled={oauthLoading} variant="secondary" className="w-full mt-4 h-10 gap-2">
-        {oauthLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
-        Continue with Google
-      </Button>
-
-      <div className="flex items-center gap-3 my-3">
-        <Separator className="flex-1" />
-        <span className="text-xs text-muted-foreground">or</span>
-        <Separator className="flex-1" />
-      </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
         <div>
           <Label className="text-xs uppercase tracking-wide text-muted-foreground">Email</Label>
           <Input className="mt-1 h-10" {...register('email')} type="email" autoComplete="email" />
@@ -138,11 +117,5 @@ export default function Login() {
         </p>
       </form>
     </AuthLayout>
-  );
-}
-
-function GoogleIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.4-1.6 4-5.5 4-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.7 3.3 14.6 2.4 12 2.4 6.7 2.4 2.4 6.7 2.4 12s4.3 9.6 9.6 9.6c5.5 0 9.2-3.9 9.2-9.4 0-.6-.1-1.1-.2-1.6H12z"/></svg>
   );
 }
