@@ -1,14 +1,43 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { MessageCircleHeart, Users, Sparkles, Facebook, Instagram } from 'lucide-react';
+import { toast } from 'sonner';
 import { Logo } from '@/components/common/Logo';
 import { PageMeta } from '@/components/common/PageMeta';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/integrations/supabase/client';
 import heroImg from '@/assets/hero-friends.jpg';
 import showcaseImg from '@/assets/app-showcase.jpg';
 
 export default function Index() {
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  // Intercept email-verification callback: do NOT auto-login.
+  // Supabase appends tokens to the URL hash (e.g. #access_token=...&type=signup).
+  useEffect(() => {
+    const hash = window.location.hash || '';
+    const search = window.location.search || '';
+    const isVerifyCallback =
+      /[#&?]type=(signup|email_change|email|invite|magiclink)/.test(hash) ||
+      /[?&]type=(signup|email_change|email|invite|magiclink)/.test(search) ||
+      hash.includes('access_token=');
+
+    if (isVerifyCallback) {
+      (async () => {
+        try {
+          await supabase.auth.signOut();
+        } catch {
+          /* ignore */
+        }
+        // Strip tokens from the URL so the auth listener can't re-hydrate.
+        window.history.replaceState({}, '', '/');
+        toast.success('✅ Email verified successfully. Please login to continue.');
+        navigate('/login', { replace: true });
+      })();
+    }
+  }, [navigate]);
 
   // SEO: Organization + WebSite JSON-LD (no UI impact)
   const jsonLd = [
