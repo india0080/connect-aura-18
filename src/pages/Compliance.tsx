@@ -64,7 +64,7 @@ export default function Compliance() {
         <p className="text-muted-foreground mt-5 max-w-2xl mx-auto">
           Our commitment to legal compliance, ethical business practices, user protection, and transparency.
         </p>
-        <p className="text-xs text-muted-foreground mt-4">Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.</p>
+        <p className="text-xs text-muted-foreground mt-4">Last Updated: April 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.</p>
       </section>
 
       {/* Body */}
@@ -626,7 +626,7 @@ export default function Compliance() {
               <tbody className="divide-y divide-border/60 text-muted-foreground">
                 <tr><td className="p-3 text-foreground">Document Title</td><td className="p-3">GoMilap Compliance Statement</td></tr>
                 <tr><td className="p-3 text-foreground">Version</td><td className="p-3">1.0</td></tr>
-                <tr><td className="p-3 text-foreground">Effective Date</td><td className="p-3">June 2025</td></tr>
+                <tr><td className="p-3 text-foreground">Effective Date</td><td className="p-3">April 2025</td></tr>
                 <tr><td className="p-3 text-foreground">Review Date</td><td className="p-3">June 2026 (or earlier if required)</td></tr>
                 <tr><td className="p-3 text-foreground">Document Owner</td><td className="p-3">Compliance Department</td></tr>
                 <tr><td className="p-3 text-foreground">Classification</td><td className="p-3">Public</td></tr>
@@ -638,7 +638,7 @@ export default function Compliance() {
             This Compliance Statement should be read in conjunction with our Terms of Service, Community Guidelines, and Privacy Policy.
           </p>
           <p className="text-xs text-muted-foreground mt-4 text-center">
-            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
+            Last Updated: April 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
           </p>
         </article>
       </section>

@@ -453,7 +453,7 @@ export default function About() {
           </div>
 
           <p className="text-xs text-muted-foreground mt-12 text-center">
-            Last Updated: June 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
+            Last Updated: April 2025 · Version 1.0 · © 2026 GoMilap. All rights reserved.
           </p>
         </div>
       </section>
