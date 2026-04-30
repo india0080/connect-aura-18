@@ -81,7 +81,7 @@ export default function Onboarding() {
           const city = addr.city || addr.town || addr.village || addr.county || '';
           const country = addr.country || '';
           const formatted = [city, country].filter(Boolean).join(', ');
-          if (formatted) setLocation(formatted);
+          if (formatted) setPendingLocation(formatted);
           else toast.error('Could not determine your city');
         } catch {
           toast.error('Could not detect your location');
