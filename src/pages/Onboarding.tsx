@@ -53,6 +53,45 @@ export default function Onboarding() {
     setInterests((prev) => prev.includes(i) ? prev.filter((x) => x !== i) : prev.length < 12 ? [...prev, i] : prev);
   };
 
+  const toggleLanguage = (l: string) => {
+    setLanguages((prev) => prev.includes(l) ? prev.filter((x) => x !== l) : [...prev, l]);
+  };
+
+  const detectLocation = () => {
+    if (!('geolocation' in navigator)) {
+      toast.error('Geolocation not supported on this device');
+      return;
+    }
+    setDetectingLocation(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords;
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`,
+            { headers: { Accept: 'application/json' } },
+          );
+          const data = await res.json();
+          const addr = data?.address ?? {};
+          const city = addr.city || addr.town || addr.village || addr.county || '';
+          const country = addr.country || '';
+          const formatted = [city, country].filter(Boolean).join(', ');
+          if (formatted) setLocation(formatted);
+          else toast.error('Could not determine your city');
+        } catch {
+          toast.error('Could not detect your location');
+        } finally {
+          setDetectingLocation(false);
+        }
+      },
+      () => {
+        toast.error('Location permission denied');
+        setDetectingLocation(false);
+      },
+      { enableHighAccuracy: false, timeout: 10000 },
+    );
+  };
+
   const next = () => {
     if (step === 1 && (!gender || !preference)) { toast.error('Pick both options'); return; }
     if (step === 3 && interests.length === 0) { toast.error('Pick at least one interest'); return; }
