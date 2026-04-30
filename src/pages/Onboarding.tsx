@@ -251,6 +251,70 @@ export default function Onboarding() {
                   })}
                 </div>
               </div>
+
+              {/* Religion */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Religion <span className="text-muted-foreground/70 normal-case">(optional)</span></p>
+                <Select value={religion} onValueChange={setReligion}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your religion" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {RELIGIONS.map((r) => (
+                      <SelectItem key={r} value={r}>{r}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Languages */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">
+                  Language 🌐 <span className="text-muted-foreground/70 normal-case">(optional, multi-select)</span>
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {LANGUAGES.map((l) => {
+                    const active = languages.includes(l);
+                    return (
+                      <button key={l} type="button" onClick={() => toggleLanguage(l)}
+                        className={`px-3.5 py-1.5 rounded-full text-sm font-medium border transition-all ${active ? 'bg-gradient-brand text-primary-foreground border-transparent shadow-glow' : 'border-border hover:border-primary/50'}`}>
+                        {l}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Location 📍 <span className="text-muted-foreground/70 normal-case">(optional)</span></p>
+                <div className="flex gap-2">
+                  <Input
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="e.g. Delhi, India"
+                  />
+                  <Button type="button" variant="secondary" onClick={detectLocation} disabled={detectingLocation} className="gap-1 shrink-0">
+                    {detectingLocation ? <Loader2 className="h-4 w-4 animate-spin" /> : <MapPin className="h-4 w-4" />}
+                    <span className="hidden sm:inline">Detect</span>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Relationship Status */}
+              <div className="mt-5">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Relationship Status 💑 <span className="text-muted-foreground/70 normal-case">(optional)</span></p>
+                <Select value={relationshipStatus} onValueChange={setRelationshipStatus}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {RELATIONSHIP_STATUSES.map((s) => (
+                      <SelectItem key={s} value={s}>{s}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           )}
 
