@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 import { Checkbox } from '@/components/ui/checkbox';
+import { GoogleButton } from '@/components/auth/GoogleButton';
 
 type Form = z.infer<typeof loginSchema>;
 
@@ -69,7 +70,16 @@ export default function Login() {
       <h1 className="text-xl sm:text-2xl font-display font-bold">Welcome back</h1>
       <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Sign in to continue your conversations.</p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
+      <div className="mt-4">
+        <GoogleButton label="Continue with Google" />
+        <div className="flex items-center gap-3 my-3">
+          <span className="h-px flex-1 bg-border" />
+          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">or</span>
+          <span className="h-px flex-1 bg-border" />
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         <div>
           <Label className="text-xs uppercase tracking-wide text-muted-foreground">Email</Label>
           <Input className="mt-1 h-10" {...register('email')} type="email" autoComplete="email" />
