@@ -11,8 +11,17 @@ import heroImg from '@/assets/hero-friends.jpg';
 import showcaseImg from '@/assets/app-showcase.jpg';
 
 export default function Index() {
-  const { user } = useAuth();
+  const { user, profile, loading } = useAuth();
   const navigate = useNavigate();
+
+  // After Google sign-in (or any auth), if profile sync is done and onboarding
+  // hasn't been completed, send the user to onboarding.
+  useEffect(() => {
+    if (loading || !user || !profile) return;
+    if (!profile.onboarding_complete) {
+      navigate('/onboarding', { replace: true });
+    }
+  }, [loading, user, profile, navigate]);
 
   // Intercept email-verification callback: do NOT auto-login.
   // Supabase appends tokens to the URL hash (e.g. #access_token=...&type=signup).
