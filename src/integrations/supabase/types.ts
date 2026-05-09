@@ -290,6 +290,7 @@ export type Database = {
           name: string
           price_inr: number
           sort_order: number
+          stripe_price_id: string | null
         }
         Insert: {
           active?: boolean
@@ -302,6 +303,7 @@ export type Database = {
           name: string
           price_inr: number
           sort_order?: number
+          stripe_price_id?: string | null
         }
         Update: {
           active?: boolean
@@ -314,6 +316,7 @@ export type Database = {
           name?: string
           price_inr?: number
           sort_order?: number
+          stripe_price_id?: string | null
         }
         Relationships: []
       }
@@ -402,6 +405,7 @@ export type Database = {
           perks: Json
           price_inr: number
           sort_order: number
+          stripe_price_id: string | null
           tier: string
         }
         Insert: {
@@ -416,6 +420,7 @@ export type Database = {
           perks?: Json
           price_inr: number
           sort_order?: number
+          stripe_price_id?: string | null
           tier: string
         }
         Update: {
@@ -430,6 +435,7 @@ export type Database = {
           perks?: Json
           price_inr?: number
           sort_order?: number
+          stripe_price_id?: string | null
           tier?: string
         }
         Relationships: []

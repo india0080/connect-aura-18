@@ -23,6 +23,12 @@ import Friends from "./pages/dashboard/Friends";
 import Calls from "./pages/dashboard/Calls";
 import Profile from "./pages/dashboard/Profile";
 import Premium from "./pages/Premium";
+import Wallet from "./pages/dashboard/Wallet";
+import Recharge from "./pages/Recharge";
+import Vip from "./pages/Vip";
+import DailyRewards from "./pages/DailyRewards";
+import Transactions from "./pages/Transactions";
+import CheckoutReturn from "./pages/CheckoutReturn";
 import Notifications from "./pages/Notifications";
 import SafetyGuidelines from "./pages/SafetyGuidelines";
 import SafetyCode from "./pages/SafetyCode";
@@ -67,8 +73,14 @@ const App = () => (
               <Route path="friends" element={<Friends />} />
               <Route path="calls" element={<Calls />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="wallet" element={<Wallet />} />
             </Route>
 
+            <Route path="/recharge" element={<ProtectedRoute><Recharge /></ProtectedRoute>} />
+            <Route path="/vip" element={<ProtectedRoute><Vip /></ProtectedRoute>} />
+            <Route path="/rewards" element={<ProtectedRoute><DailyRewards /></ProtectedRoute>} />
+            <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
+            <Route path="/checkout/return" element={<ProtectedRoute><CheckoutReturn /></ProtectedRoute>} />
             <Route path="/premium" element={<Premium />} />
             <Route path="/safety" element={<SafetyGuidelines />} />
             <Route path="/safety-code" element={<SafetyCode />} />
