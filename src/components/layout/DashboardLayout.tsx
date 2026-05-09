@@ -37,7 +37,7 @@ export function DashboardLayout() {
         <div className="p-5">
           <Logo />
         </div>
-        <nav className="px-3 flex-1 space-y-1">
+        <nav className="px-3 flex-1 space-y-1 overflow-y-auto">
           {navItems.map((item) => (
             <NavLink key={item.to} to={item.to}
               className={({ isActive }) =>
@@ -54,6 +54,23 @@ export function DashboardLayout() {
               )}
             </NavLink>
           ))}
+
+          <div className="pt-4 mt-2 border-t border-border/60">
+            <p className="px-3 pb-2 text-[10px] uppercase tracking-widest text-muted-foreground">Earn & Spend</p>
+            {sideExtra.map((item) => (
+              <NavLink key={item.to} to={item.to}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    isActive
+                      ? 'bg-gradient-brand-soft text-foreground border border-border/60'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/60'
+                  }`
+                }>
+                <item.icon className="h-5 w-5" />
+                <span className="flex-1">{item.label}</span>
+              </NavLink>
+            ))}
+          </div>
         </nav>
         <div className="p-3 border-t border-border/60">
           <Link to="/premium" className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-gradient-brand-soft text-sm font-medium hover:opacity-90">
@@ -82,11 +99,34 @@ export function DashboardLayout() {
       <div className="flex-1 flex flex-col min-w-0">
         <header className="md:hidden flex items-center justify-between px-4 py-3 border-b border-border/60 bg-background/80 backdrop-blur-xl sticky top-0 z-30">
           <Logo />
-          <Link to="/notifications" className="p-2 rounded-full hover:bg-secondary">
-            <Bell className="h-5 w-5" />
-          </Link>
+          <div className="flex items-center gap-1">
+            <Link to="/dashboard/wallet"><CoinChip /></Link>
+            <Link to="/rewards" className="p-2 rounded-full hover:bg-secondary" aria-label="Daily Rewards">
+              <Gift className="h-5 w-5" />
+            </Link>
+            <Link to="/vip" className="p-2 rounded-full hover:bg-secondary" aria-label="VIP">
+              <Crown className="h-5 w-5 text-primary" />
+            </Link>
+            <Link to="/notifications" className="p-2 rounded-full hover:bg-secondary" aria-label="Notifications">
+              <Bell className="h-5 w-5" />
+            </Link>
+          </div>
         </header>
         <header className="hidden md:flex items-center justify-end gap-2 px-6 py-3 border-b border-border/60 bg-background/40 backdrop-blur-xl">
+          <Link to="/dashboard/wallet"><CoinChip /></Link>
+          <Link to="/recharge">
+            <Button size="sm" className="h-9 bg-gradient-brand text-primary-foreground shadow-glow gap-1.5">
+              <WalletIcon className="h-4 w-4" /> Recharge
+            </Button>
+          </Link>
+          <Link to="/vip">
+            <Button size="sm" variant="outline" className="h-9 gap-1.5 border-primary/40">
+              <Crown className="h-4 w-4 text-primary" /> VIP
+            </Button>
+          </Link>
+          <Link to="/rewards" className="p-2 rounded-full hover:bg-secondary" aria-label="Daily Rewards">
+            <Gift className="h-5 w-5" />
+          </Link>
           <Link to="/notifications" className="p-2 rounded-full hover:bg-secondary relative">
             <Bell className="h-5 w-5" />
             <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-accent" />
