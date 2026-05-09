@@ -40,7 +40,7 @@ export function useWallet() {
   useEffect(() => {
     if (!user) return;
     const channel = supabase
-      .channel(`wallet-${user.id}`)
+      .channel(`wallet-${user.id}-${Math.random().toString(36).slice(2)}`)
       .on("postgres_changes", {
         event: "*",
         schema: "public",
