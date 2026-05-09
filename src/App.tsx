@@ -29,6 +29,7 @@ import Vip from "./pages/Vip";
 import DailyRewards from "./pages/DailyRewards";
 import Transactions from "./pages/Transactions";
 import CheckoutReturn from "./pages/CheckoutReturn";
+import VipWallet from "./pages/VipWallet";
 import Notifications from "./pages/Notifications";
 import SafetyGuidelines from "./pages/SafetyGuidelines";
 import SafetyCode from "./pages/SafetyCode";
@@ -76,6 +77,7 @@ const App = () => (
               <Route path="wallet" element={<Wallet />} />
             </Route>
 
+            <Route path="/vip-wallet" element={<ProtectedRoute><VipWallet /></ProtectedRoute>} />
             <Route path="/recharge" element={<ProtectedRoute><Recharge /></ProtectedRoute>} />
             <Route path="/vip" element={<ProtectedRoute><Vip /></ProtectedRoute>} />
             <Route path="/rewards" element={<ProtectedRoute><DailyRewards /></ProtectedRoute>} />
