@@ -86,11 +86,16 @@ export async function resolveOrCreateCustomer(
     throw new Error("Invalid userId");
   }
   if (options.userId) {
-    const found = await stripe.customers.search({
-      query: `metadata['userId']:'${options.userId}'`,
-      limit: 1,
-    });
-    if (found.data.length) return found.data[0].id;
+    try {
+      const found = await stripe.customers.search({
+        query: `metadata['userId']:'${options.userId}'`,
+        limit: 1,
+      });
+      if (found.data.length) return found.data[0].id;
+    } catch (e) {
+      // Stripe search may be unavailable in some regions; fall back to email lookup below.
+      console.warn("stripe.customers.search unavailable, falling back to list:", e instanceof Error ? e.message : e);
+    }
   }
   if (options.email) {
     const existing = await stripe.customers.list({ email: options.email, limit: 1 });
