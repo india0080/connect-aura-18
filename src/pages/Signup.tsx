@@ -13,7 +13,7 @@ import { PageMeta } from '@/components/common/PageMeta';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
+import { GoogleButton } from '@/components/auth/GoogleButton';
 
 type Form = z.infer<typeof signupSchema>;
 
@@ -63,7 +63,16 @@ export default function Signup() {
       <h1 className="text-2xl font-display font-bold">Create your account</h1>
       <p className="text-sm text-muted-foreground mt-1">Join GoMilap and meet people who get you.</p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+      <div className="mt-6">
+        <GoogleButton label="Sign up with Google" />
+        <div className="flex items-center gap-3 my-4">
+          <span className="h-px flex-1 bg-border" />
+          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">or</span>
+          <span className="h-px flex-1 bg-border" />
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <Field label="Full name" error={errors.fullName?.message}>
           <Input {...register('fullName')} placeholder="Jane Doe" autoComplete="name" />
         </Field>
