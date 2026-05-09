@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { MessageCircleHeart, Users, Sparkles, Facebook, Instagram } from 'lucide-react';
+import { MessageCircleHeart, Users, Sparkles, Facebook, Instagram, Crown, Coins } from 'lucide-react';
 import { toast } from 'sonner';
 import { Logo } from '@/components/common/Logo';
 import { PageMeta } from '@/components/common/PageMeta';
@@ -98,9 +98,18 @@ export default function Index() {
 
             <div className="flex gap-2">
               {user ? (
-                <Button asChild className="bg-gradient-brand text-primary-foreground">
-                  <Link to="/dashboard">Open app</Link>
-                </Button>
+                <>
+                  <Link to="/vip-wallet" className="hidden sm:inline-flex group relative items-center gap-2 px-4 py-2 rounded-full font-semibold text-sm text-white shadow-glow overflow-hidden">
+                    <span className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 via-purple-600 to-pink-500 [background-size:200%_200%] animate-gradient-shift" />
+                    <span className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-shine" />
+                    <Crown className="relative h-4 w-4" />
+                    <span className="relative">VIP & Coins</span>
+                    <Coins className="relative h-4 w-4 text-amber-300" />
+                  </Link>
+                  <Button asChild className="bg-gradient-brand text-primary-foreground">
+                    <Link to="/dashboard">Open app</Link>
+                  </Button>
+                </>
               ) : (
                 <Button asChild variant="secondary" className="rounded-full">
                   <Link to="/login">Login</Link>
