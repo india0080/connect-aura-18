@@ -14,6 +14,96 @@ export type Database = {
   }
   public: {
     Tables: {
+      coin_transactions: {
+        Row: {
+          balance_after: number
+          bonus_coins: number
+          coins: number
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json
+          reference_id: string | null
+          type: Database["public"]["Enums"]["coin_tx_type"]
+          user_id: string
+        }
+        Insert: {
+          balance_after: number
+          bonus_coins?: number
+          coins: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          reference_id?: string | null
+          type: Database["public"]["Enums"]["coin_tx_type"]
+          user_id: string
+        }
+        Update: {
+          balance_after?: number
+          bonus_coins?: number
+          coins?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          reference_id?: string | null
+          type?: Database["public"]["Enums"]["coin_tx_type"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      daily_checkins: {
+        Row: {
+          current_streak: number
+          last_claimed_date: string | null
+          longest_streak: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          current_streak?: number
+          last_claimed_date?: string | null
+          longest_streak?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          current_streak?: number
+          last_claimed_date?: string | null
+          longest_streak?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      daily_reward_claims: {
+        Row: {
+          claimed_date: string
+          coins_awarded: number
+          created_at: string
+          day_index: number
+          id: string
+          user_id: string
+        }
+        Insert: {
+          claimed_date?: string
+          coins_awarded: number
+          created_at?: string
+          day_index: number
+          id?: string
+          user_id: string
+        }
+        Update: {
+          claimed_date?: string
+          coins_awarded?: number
+          created_at?: string
+          day_index?: number
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       friend_requests: {
         Row: {
           created_at: string
@@ -71,6 +161,69 @@ export type Database = {
         }
         Relationships: []
       }
+      payment_orders: {
+        Row: {
+          amount_inr: number
+          created_at: string
+          currency: string
+          id: string
+          kind: string
+          metadata: Json
+          package_id: string | null
+          provider: string
+          provider_session_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+          vip_plan_id: string | null
+        }
+        Insert: {
+          amount_inr: number
+          created_at?: string
+          currency?: string
+          id?: string
+          kind: string
+          metadata?: Json
+          package_id?: string | null
+          provider?: string
+          provider_session_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+          vip_plan_id?: string | null
+        }
+        Update: {
+          amount_inr?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          kind?: string
+          metadata?: Json
+          package_id?: string | null
+          provider?: string
+          provider_session_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+          vip_plan_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_orders_package_id_fkey"
+            columns: ["package_id"]
+            isOneToOne: false
+            referencedRelation: "recharge_packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_orders_vip_plan_id_fkey"
+            columns: ["vip_plan_id"]
+            isOneToOne: false
+            referencedRelation: "vip_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -125,6 +278,99 @@ export type Database = {
         }
         Relationships: []
       }
+      recharge_packages: {
+        Row: {
+          active: boolean
+          badge: string | null
+          bonus_percent: number
+          coins: number
+          created_at: string
+          highlight: boolean
+          id: string
+          name: string
+          price_inr: number
+          sort_order: number
+        }
+        Insert: {
+          active?: boolean
+          badge?: string | null
+          bonus_percent?: number
+          coins: number
+          created_at?: string
+          highlight?: boolean
+          id?: string
+          name: string
+          price_inr: number
+          sort_order?: number
+        }
+        Update: {
+          active?: boolean
+          badge?: string | null
+          bonus_percent?: number
+          coins?: number
+          created_at?: string
+          highlight?: boolean
+          id?: string
+          name?: string
+          price_inr?: number
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          created_at: string
+          id: string
+          referred_id: string
+          referrer_id: string
+          reward_coins: number
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          referred_id: string
+          referrer_id: string
+          reward_coins?: number
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          referred_id?: string
+          referrer_id?: string
+          reward_coins?: number
+          status?: string
+        }
+        Relationships: []
+      }
+      spin_history: {
+        Row: {
+          created_at: string
+          id: string
+          prize_coins: number
+          prize_label: string | null
+          spun_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prize_coins: number
+          prize_label?: string | null
+          spun_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prize_coins?: number
+          prize_label?: string | null
+          spun_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -143,11 +389,156 @@ export type Database = {
         }
         Relationships: []
       }
+      vip_plans: {
+        Row: {
+          active: boolean
+          badge: string | null
+          bonus_coins: number
+          created_at: string
+          duration_days: number
+          highlight: boolean
+          id: string
+          name: string
+          perks: Json
+          price_inr: number
+          sort_order: number
+          tier: string
+        }
+        Insert: {
+          active?: boolean
+          badge?: string | null
+          bonus_coins?: number
+          created_at?: string
+          duration_days: number
+          highlight?: boolean
+          id?: string
+          name: string
+          perks?: Json
+          price_inr: number
+          sort_order?: number
+          tier: string
+        }
+        Update: {
+          active?: boolean
+          badge?: string | null
+          bonus_coins?: number
+          created_at?: string
+          duration_days?: number
+          highlight?: boolean
+          id?: string
+          name?: string
+          perks?: Json
+          price_inr?: number
+          sort_order?: number
+          tier?: string
+        }
+        Relationships: []
+      }
+      vip_subscriptions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          payment_ref: string | null
+          plan_id: string
+          started_at: string
+          status: string
+          tier: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id?: string
+          payment_ref?: string | null
+          plan_id: string
+          started_at?: string
+          status?: string
+          tier: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          payment_ref?: string | null
+          plan_id?: string
+          started_at?: string
+          status?: string
+          tier?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vip_subscriptions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "vip_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wallets: {
+        Row: {
+          bonus_coins: number
+          coins: number
+          created_at: string
+          total_recharged: number
+          total_spent: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bonus_coins?: number
+          coins?: number
+          created_at?: string
+          total_recharged?: number
+          total_spent?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bonus_coins?: number
+          coins?: number
+          created_at?: string
+          total_recharged?: number
+          total_spent?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      adjust_wallet: {
+        Args: {
+          _bonus_coins: number
+          _coins: number
+          _description: string
+          _metadata?: Json
+          _reference?: string
+          _type: Database["public"]["Enums"]["coin_tx_type"]
+          _user_id: string
+        }
+        Returns: {
+          bonus_coins: number
+          coins: number
+          created_at: string
+          total_recharged: number
+          total_spent: number
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "wallets"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -158,6 +549,14 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      coin_tx_type:
+        | "recharge"
+        | "spend"
+        | "bonus"
+        | "reward"
+        | "refund"
+        | "referral"
+        | "vip_bonus"
       gender_type: "male" | "female" | "non-binary" | "prefer-not-to-say"
       preference_type: "men" | "women" | "everyone"
       request_status: "pending" | "accepted" | "rejected"
@@ -289,6 +688,15 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      coin_tx_type: [
+        "recharge",
+        "spend",
+        "bonus",
+        "reward",
+        "refund",
+        "referral",
+        "vip_bonus",
+      ],
       gender_type: ["male", "female", "non-binary", "prefer-not-to-say"],
       preference_type: ["men", "women", "everyone"],
       request_status: ["pending", "accepted", "rejected"],
