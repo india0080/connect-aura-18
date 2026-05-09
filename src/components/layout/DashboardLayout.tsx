@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { Compass, MessageCircle, Phone, User, LogOut, Bell, Crown, Users } from 'lucide-react';
+import { Compass, MessageCircle, Phone, User, LogOut, Bell, Crown, Users, Wallet as WalletIcon, Gift } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useUnreadCount } from '@/hooks/useUnreadCount';
 import { Logo } from '@/components/common/Logo';
@@ -7,13 +7,20 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
+import { CoinChip } from '@/components/wallet/CoinChip';
 
 const navItems = [
   { to: '/dashboard/discover', label: 'Discover', icon: Compass },
   { to: '/dashboard/chat', label: 'Chat', icon: MessageCircle, showBadge: true },
   { to: '/dashboard/friends', label: 'Friends', icon: Users },
-  { to: '/dashboard/calls', label: 'Calls', icon: Phone },
+  { to: '/dashboard/wallet', label: 'Wallet', icon: WalletIcon },
   { to: '/dashboard/profile', label: 'Profile', icon: User },
+];
+
+const sideExtra = [
+  { to: '/recharge', label: 'Recharge', icon: WalletIcon },
+  { to: '/vip', label: 'VIP Membership', icon: Crown },
+  { to: '/rewards', label: 'Daily Rewards', icon: Gift },
 ];
 
 export function DashboardLayout() {
