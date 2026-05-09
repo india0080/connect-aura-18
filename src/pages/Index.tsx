@@ -100,8 +100,8 @@ export default function Index() {
               {user ? (
                 <>
                   <Link to="/vip-wallet" className="hidden sm:inline-flex group relative items-center gap-2 px-4 py-2 rounded-full font-semibold text-sm text-white shadow-glow overflow-hidden">
-                    <span className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 via-purple-600 to-pink-500 animate-[gradient_3s_ease_infinite] [background-size:200%_200%]" />
-                    <span className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-white/20 transition-opacity" />
+                    <span className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 via-purple-600 to-pink-500 [background-size:200%_200%] animate-gradient-shift" />
+                    <span className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-shine" />
                     <Crown className="relative h-4 w-4" />
                     <span className="relative">VIP & Coins</span>
                     <Coins className="relative h-4 w-4 text-amber-300" />
